@@ -15,7 +15,7 @@
     margin-top: 1px;
     margin-bottom: 3px;
     position: relative;
-    border-top: 2px solid rgba(255, 255, 255, 0.644);
+    border-top: 2px solid var(--task-bar-white);
     border-bottom: 0;
 }
 
@@ -31,7 +31,6 @@
 #left-side-task-menu {
     display: flex;
     flex-direction: row;
-    gap: 5px;
     align-items: center;
 }
 
@@ -49,8 +48,8 @@
     flex-direction: row;
 
     border-width: 2px 2px 2px 2px;
-    border-top-color: rgba(255, 255, 255, 0.644);
-    border-left-color: rgba(255, 255, 255, 0.644);
+    border-top-color: var(--task-bar-white);
+    border-left-color: var(--task-bar-white);
     border-bottom-color: rgba(14, 13, 13, 0.781);
     border-right-color: rgba(14, 13, 13, 0.781);
     /* border-color: rgba(255, 255, 255, 0.644); */
@@ -75,9 +74,51 @@
     margin-right: 4px;
 }
 
+.vertical-line-skinny {
+    width: 0px;
+    height: 36px;
+    border-left: 2px solid rgba(37, 37, 37, 0.226);
+    border-right: 2px solid var(--task-bar-white);
+}
+
+.vertical-line-fat {
+    position: relative;
+    width: 1px;
+    height: 25px;
+    background-color: rgba(207, 206, 206, 0.904);
+    border-left: 2px solid rgba(241, 241, 241, 0.849);
+    border-top: 2px solid rgba(241, 241, 241, 0.849);
+    box-shadow: 1px 1px 1px 1px rgb(161, 161, 161);
+}
+
+#before-skinny {
+    margin-left: 3px;
+}
+
+#before-fat {
+    margin-left: 3px;
+}
+
+#after-skinny {
+    margin-left: 15px;
+}
+
+#after-fat {
+    margin-left: 3px;
+}
+
 #linkedin {
+    position: relative;
+    top: 3px;
+    height: 30px;
+    width: 30px;
+    margin-left: 15px;
+}
+
+#github {
     position: relative;
     top: 2px;
     height: 30px;
     width: 30px;
+    margin-left: 12px;
 }

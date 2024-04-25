@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --task-bar-white: rgba(255, 255, 255, 0.63);
 }
 
 body {
