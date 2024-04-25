@@ -19,3 +19,17 @@ body {
   place-items: center;
 }
 
+@font-face {
+  font-family: 'Jersey';
+  src: local('Jersey'), url(./assets/fonts/Jersey10-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'MS-Sans-Serif';
+  src: local('MS-Sans-Serif'), url(./assets/fonts/ms-sans-serif-1.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'MS-Sans-Serif-Bold';
+  src: local('MS-Sans-Serif-Bold'), url(./assets/fonts/ms-sans-serif-b.ttf) format('truetype');
+}

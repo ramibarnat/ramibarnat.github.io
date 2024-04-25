@@ -1,6 +1,6 @@
 #bar-container {
     width: 100%;
-    height: 46px;
+    height: 48px;
     background-color: rgba(194,197,202,255);
     display: flex;
     flex-direction: column;
@@ -13,9 +13,8 @@
     margin-right: 0;
     margin-left: 0;
     margin-top: 1px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     position: relative;
-    /* background-color: rgba(255, 255, 255, 0.644); */
     border-top: 2px solid rgba(255, 255, 255, 0.644);
     border-bottom: 0;
 }
@@ -29,22 +28,41 @@
     align-items: center;
 }
 
+#left-side-task-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
 #start {
-    /* margin: auto; */
-    justify-content: between;
+    width: 80px;
+    height: 31px;
+    margin-left: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+
     align-items: center;
     display: flex;
     flex-direction: row;
-    margin-left: 5px;
-    background-color: rgba(194,197,202,255);
-    width: 80px;
-    height: 30px;
-    border-width: 2px 0px 0px 2px;
-    border-color: rgba(255, 255, 255, 0.644);
+
+    border-width: 2px 2px 2px 2px;
+    border-top-color: rgba(255, 255, 255, 0.644);
+    border-left-color: rgba(255, 255, 255, 0.644);
+    border-bottom-color: rgba(14, 13, 13, 0.781);
+    border-right-color: rgba(14, 13, 13, 0.781);
+    /* border-color: rgba(255, 255, 255, 0.644); */
     border-style: solid;
-    box-shadow: -1px -1px 1px 1px rgba(0, 0, 0, 0.575) inset;
-    cursor: pointer;
+    box-shadow: -1px -1px 1px 1px rgba(0, 0, 0, 0.226) inset;
+
+    font-family: MS-Sans-Serif-Bold;
+    font-size: 17px;
     color: black;
+
+    user-select: none;
+    cursor: pointer;
 }
 
 #start-text {
@@ -53,5 +71,13 @@
 
 #windows-icon {
     height: auto;
+    width: 33px;
+    margin-right: 4px;
+}
+
+#linkedin {
+    position: relative;
+    top: 2px;
+    height: 30px;
     width: 30px;
 }
