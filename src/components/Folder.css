@@ -8,6 +8,10 @@
     /* border: 2px solid green; */
 }
 
+#folder-container:hover {
+    cursor: grab;
+}
+
 #folder-image {
     width: 56px;
     height: auto;
@@ -15,6 +19,7 @@
 }
 
 #folder-name-text {
+    /* background-color: rgba(4, 2, 146, 0.979); */
     max-width: 66px;
     width: fit-content;
     padding-top: 0;

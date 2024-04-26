@@ -1,38 +1,20 @@
 import folder_img from '../assets/folder_icon.png'
-import { useState, useRef, useEffect, Fragment } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './Folder.css'
+import Draggable from 'react-draggable'
 
 interface FolderProps {
     folder_name: string;
+    init_x: number;
+    init_y: number;
 }
-function Folder({folder_name="New Folder"}: FolderProps) {
+function Folder({folder_name="New Folder", init_x, init_y}: FolderProps) {
     const [isHighlighted, setIsHighlighted] = useState(false);
+    const [position, setPosition] = useState({x: init_x, y: init_y});
 
     // This hook will be used to create a reference to a DOM element
     // that can be used in our handleClickOutside function
     const componentRef = useRef(null);
-
-    useEffect(() => {
-        document.addEventListener('click', handleOutsideClick);
-        return () => document.removeEventListener('click', handleOutsideClick);
-    }, []);
-
-    const handleOutsideClick = (event: any) => {
-        if ( componentRef.current && !((componentRef.current as HTMLElement).contains(event.target)) ) {
-            setIsHighlighted(() => false)
-        }
-    }
-    return (
-        <div ref={componentRef} onClick={handleClick} id='folder-container'>
-            <img id='folder-image' src={folder_img} />
-            <p style={{ backgroundColor: isHighlighted ? 'rgba(0,0,123,255)' : 'transparent',
-                        color: isHighlighted ? 'white' : 'black',
-                        borderColor: isHighlighted ? 'white' : 'red',
-                        borderWidth: isHighlighted ? '2px' : '2px',
-                        borderStyle: isHighlighted ? 'dotted' : 'none',
-             }} id='folder-name-text'>{folder_name}</p>
-        </div>
-    )
 
     function handleClick() {
         setIsHighlighted((prevHighlighted) => {
@@ -42,6 +24,42 @@ function Folder({folder_name="New Folder"}: FolderProps) {
             return false;
         });
     }
+
+    const handleOutsideClick = (event: any) => {
+        if ( componentRef.current && !((componentRef.current as HTMLElement).contains(event.target)) ) {
+            setIsHighlighted(() => false)
+        }
+    }
+
+    const handleDrag = (event: any, data: any) => {
+        setPosition({
+            x: position.x + data.deltaX,
+            y: position.y + data.deltaY,
+        });
+    }
+
+    useEffect(() => {
+        document.addEventListener('click', handleOutsideClick);
+
+        return () => document.removeEventListener('click', handleOutsideClick);
+    }, []);
+   
+    return (
+        <Draggable bounds={"parent"} position={{x:position.x, y:position.y}} onDrag={handleDrag}
+            onMouseDown={(event) => event.preventDefault()}>
+            <div ref={componentRef} onClick={handleClick} id='folder-container'>
+                <img id='folder-image' src={folder_img} />
+                <p style={{ 
+                            backgroundColor: isHighlighted ? 'rgba(4, 2, 146, 0.979)' : 'transparent',
+                            color: isHighlighted ? 'rgba(255, 255, 255, 0.95)' : 'black',
+                            borderColor: isHighlighted ? 'rgba(255, 255, 255, 0.85)' : 'red',
+                            borderWidth: isHighlighted ? '2px' : '2px',
+                            borderStyle: isHighlighted ? 'dotted' : 'none',
+                }} id='folder-name-text'>{folder_name}</p>
+            </div>
+        </Draggable>
+    )
+    
 }
 
 export default Folder
