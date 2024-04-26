@@ -32,6 +32,7 @@ function Folder({folder_name="New Folder", init_x, init_y}: FolderProps) {
     }
 
     const handleDrag = (event: any, data: any) => {
+        event = event; // prevents error, fix this later
         setPosition({
             x: position.x + data.deltaX,
             y: position.y + data.deltaY,
