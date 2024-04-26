@@ -5,10 +5,10 @@ import Draggable from 'react-draggable'
 
 interface FolderProps {
     folder_name: string;
-    init_x: number;
-    init_y: number;
+    init_x?: number;
+    init_y?: number;
 }
-function Folder({folder_name="New Folder", init_x, init_y}: FolderProps) {
+function Folder({folder_name="New Folder", init_x=0, init_y=0}: FolderProps) {
     const [isHighlighted, setIsHighlighted] = useState(false);
     const [position, setPosition] = useState({x: init_x, y: init_y});
 
@@ -53,9 +53,7 @@ function Folder({folder_name="New Folder", init_x, init_y}: FolderProps) {
                 <p style={{ 
                             backgroundColor: isHighlighted ? 'rgba(4, 2, 146, 0.979)' : 'transparent',
                             color: isHighlighted ? 'rgba(255, 255, 255, 0.95)' : 'black',
-                            borderColor: isHighlighted ? 'rgba(255, 255, 255, 0.85)' : 'red',
-                            borderWidth: isHighlighted ? '2px' : '2px',
-                            borderStyle: isHighlighted ? 'dotted' : 'none',
+                            borderColor: isHighlighted ? 'rgba(255, 255, 255, 0.85)' : 'transparent',
                 }} id='folder-name-text'>{folder_name}</p>
             </div>
         </Draggable>

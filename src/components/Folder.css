@@ -15,7 +15,7 @@
 #folder-image {
     width: 56px;
     height: auto;
-    /* user-select: none; */
+    user-select: none;
 }
 
 #folder-name-text {
@@ -26,9 +26,10 @@
     padding-bottom: 0;
     padding-right: 1px;
     padding-left: 1px; 
-    margin-top: 7px;
+    margin-top: 9px;
     margin-bottom: 0;
     line-height: 19px;
     font-family: "MS-Sans-Serif";
     color: black;
+    border: 2px dotted transparent;
 }

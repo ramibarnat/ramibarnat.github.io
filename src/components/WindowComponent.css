@@ -1,0 +1,38 @@
+#outer-window-container {
+    max-width: fit-content;
+    max-height: fit-content;
+}
+
+#window-container {
+    min-width: 140px;
+    min-height: 120px;
+    max-width: fit-content;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+}
+
+#window-top-bar {
+    padding: 3px;
+    display: flex;
+    justify-content: end;
+    height: fit-content;
+    background: linear-gradient(to right, rgba(0,0,123,1.0), rgba(8,132,206,1.0));
+    cursor: grab;
+}
+
+#close-application {
+    width: 20px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#close-icon {
+    width: 14px;
+    height: 12px;
+    user-select: none;
+}
