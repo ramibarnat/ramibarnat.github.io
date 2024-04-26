@@ -9,6 +9,9 @@
     height: 100%;
 }
 
+.draggable-components {
+    max-width: fit-content;
+}
 .draggable-components:hover {
     cursor: grab;
 }

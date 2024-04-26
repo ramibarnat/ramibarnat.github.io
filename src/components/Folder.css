@@ -1,4 +1,29 @@
+#folder-container {
+    display: flex;
+    overflow-wrap: break-word;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 66px;
+    /* border: 2px solid green; */
+}
+
 #folder-image {
-    width: 55px;
+    width: 56px;
     height: auto;
+    /* user-select: none; */
+}
+
+#folder-name-text {
+    max-width: 66px;
+    width: fit-content;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 1px;
+    padding-left: 1px; 
+    margin-top: 7px;
+    margin-bottom: 0;
+    line-height: 19px;
+    font-family: "MS-Sans-Serif";
+    color: black;
 }

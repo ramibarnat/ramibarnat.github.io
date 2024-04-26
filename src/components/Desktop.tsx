@@ -6,9 +6,9 @@ import Draggable from 'react-draggable'
 function Desktop() {
     return (
         <div id="desktop-container">
-            <Draggable>
+            <Draggable bounds={"parent"} onMouseDown={(event) => event.preventDefault()}>
                 <div className="draggable-components">
-                    <Folder/>
+                    <Folder folder_name="Projects"/>
                 </div>
             </Draggable>
         </div>
