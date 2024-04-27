@@ -21,7 +21,6 @@
   border-right: 1px solid rgba(0, 0, 0, 0.897);
   border-bottom: 1px solid rgba(0, 0, 0, 0.897);
   background-color: rgba(194,197,202,1.0);
-
 }
 
 .default-inner-container {
@@ -31,6 +30,20 @@
   border-right: 1px rgba(123,123,123,255) solid;
 }
 
+.clicked-outer-container {
+  border-top: 2px solid rgba(0, 0, 0, 0.897);
+  border-left: 2px solid rgba(0, 0, 0, 0.897);
+  border-right: 1px solid rgba(222,222,222,1.0);
+  border-bottom: 1px solid rgba(222,222,222,1.0);
+  background-color: rgba(194,197,202,1.0);
+}
+
+.clicked-inner-container {
+  border-top: 1px rgba(123,123,123,255) solid;
+  border-left: 1px rgba(123,123,123,255) solid;
+  /* border-bottom: 1px rgba(123,123,123,255) solid;
+  border-right: 1px rgba(123,123,123,255) solid; */
+}
 body, html {
   font-family: 'MS-Sans-Serif';
 }
