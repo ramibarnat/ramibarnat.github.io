@@ -27,7 +27,7 @@ function Folder({folder_name="New Folder", init_x=0, init_y=0}: FolderProps) {
 
     const handleOutsideClick = (event: any) => {
         if ( componentRef.current && !((componentRef.current as HTMLElement).contains(event.target)) ) {
-            setIsHighlighted(() => false)
+            setIsHighlighted(false);
         }
     }
 

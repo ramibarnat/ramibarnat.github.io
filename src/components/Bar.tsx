@@ -6,29 +6,42 @@ import { useState, useEffect, useRef } from 'react'
 
 function Bar() {
     const [startPressed, setStartPressed] = useState(false);
+
+    // We absolutely need this to ensure that the first click was on
+    // the start button and not just anywhere on the screen
+    const [mouseDownStart, setMouseDownStart] = useState(false);
     const startButtonRef = useRef(null);
 
     const handleMouseUp = (event: any) => {
         if (startButtonRef.current && !((startButtonRef.current as HTMLElement).contains(event.target))) {
-            setStartPressed((previousState) => (!previousState));
+            setMouseDownStart((prev) => {
+                if (prev) {
+                    setStartPressed((previousState) => (!previousState))
+                } else {
+                    setStartPressed(false);
+                }
+                return false;
+            })
+            // if (mouseDownStart) {
+            //     setStartPressed((previousState) => (!previousState));                
+            // } else if (startPressed) {
+            //     setStartPressed(false);
+            // }
         } 
+        setMouseDownStart(false);
     }
 
     const handleMouseDownStart = () => {
-        if (!startPressed) {
-            setStartPressed(true);
-        } else {
-            setStartPressed(false);
-        }
-    }
-
-    const handleStartClick = () => {
-        // setStartPressed((previousValue) => {
-        //     if (startButtonMouseDown) {
-        //         return true;
-        //     }
-        //     return false;
-        // });
+        setMouseDownStart(() => {
+            console.log('mouse down start');
+            return true;
+        });
+        setStartPressed((prev) => (!prev));
+        // if (!startPressed) {
+        //     setStartPressed(true);
+        // } else {
+        //     setStartPressed(false);
+        // }
     }
 
     useEffect(() => {
@@ -48,7 +61,7 @@ function Bar() {
                         borderBottom: startPressed ? '1px solid rgba(255, 255, 255, 0.959)' : '2px solid rgba(14, 13, 13, 0.781)',
                         marginRight: startPressed ? '1px' : '0px',
                         marginTop: startPressed ? '1px' : '0px',
-                        }} ref={startButtonRef} id="start-container" onClick={handleStartClick} onMouseDown={handleMouseDownStart} >
+                        }} ref={startButtonRef} draggable='false' id="start-container" onMouseDown={handleMouseDownStart} >
                         <div style={{
                             borderTop: startPressed ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
                             borderLeft: startPressed ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
