@@ -10,7 +10,7 @@ function Bar() {
 
     const handleMouseUp = (event: any) => {
         if (startButtonRef.current && !((startButtonRef.current as HTMLElement).contains(event.target))) {
-            setStartPressed(false);
+            setStartPressed((previousState) => (!previousState));
         } 
     }
 
