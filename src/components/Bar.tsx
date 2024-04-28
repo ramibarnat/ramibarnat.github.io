@@ -6,26 +6,32 @@ import { useState, useEffect, useRef } from 'react'
 
 function Bar() {
     const [startButtonMouseDown, setStartButtonMouseDown] = useState(false);
+    const [startPressed, setStartPressed] = useState(false);
     const startButtonRef = useRef(null);
 
     const handleMouseUp = (event: any) => {
-        event=event;
-        // if (event.target !== startButtonRef.current) {
-        //     setStartButtonMouseDown((previousValue) => {
-        //         if (!previousValue) {
-        //             return false;
-        //         }
-        //         return true;
-        //     });
-        // }
+        if (startButtonRef.current && !((startButtonRef.current as HTMLElement).contains(event.target))) {
+            setStartPressed(false);
+            setStartButtonMouseDown(false);
+        } 
     }
 
     const handleMouseDownStart = () => {
-        // setStartButtonMouseDown(true);
+        if (!startPressed) {
+            setStartPressed(true);
+            setStartButtonMouseDown(true);
+        } else {
+            setStartPressed(false);
+        }
     }
 
     const handleStartClick = () => {
-        setStartButtonMouseDown((previousValue) => (!previousValue));
+        // setStartPressed((previousValue) => {
+        //     if (startButtonMouseDown) {
+        //         return true;
+        //     }
+        //     return false;
+        // });
     }
 
     useEffect(() => {
@@ -39,20 +45,20 @@ function Bar() {
             <div id='task-menu'>
                 <div id='left-side-task-menu'>
                     <div style={{
-                        borderTop: startButtonMouseDown ? '2px solid rgba(14, 13, 13, 0.781)' : '1px solid rgba(255, 255, 255, 0.959)',
-                        borderLeft: startButtonMouseDown ? '2px solid rgba(14, 13, 13, 0.781)' : '1px solid rgba(255, 255, 255, 0.959)',
-                        borderRight: startButtonMouseDown ? '1px solid rgba(255, 255, 255, 0.959)' : '2px solid rgba(14, 13, 13, 0.781)',
-                        borderBottom: startButtonMouseDown ? '1px solid rgba(255, 255, 255, 0.959)' : '2px solid rgba(14, 13, 13, 0.781)',
-                        marginRight: startButtonMouseDown ? '1px' : '0px',
-                        marginTop: startButtonMouseDown ? '1px' : '0px',
-                        }} id="start-container" onClick={handleStartClick} ref={startButtonRef}>
+                        borderTop: startPressed ? '2px solid rgba(14, 13, 13, 0.781)' : '1px solid rgba(255, 255, 255, 0.959)',
+                        borderLeft: startPressed ? '2px solid rgba(14, 13, 13, 0.781)' : '1px solid rgba(255, 255, 255, 0.959)',
+                        borderRight: startPressed ? '1px solid rgba(255, 255, 255, 0.959)' : '2px solid rgba(14, 13, 13, 0.781)',
+                        borderBottom: startPressed ? '1px solid rgba(255, 255, 255, 0.959)' : '2px solid rgba(14, 13, 13, 0.781)',
+                        marginRight: startPressed ? '1px' : '0px',
+                        marginTop: startPressed ? '1px' : '0px',
+                        }} ref={startButtonRef} id="start-container" onClick={handleStartClick} onMouseDown={handleMouseDownStart} >
                         <div style={{
-                            borderTop: startButtonMouseDown ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
-                            borderLeft: startButtonMouseDown ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
-                            borderRight: startButtonMouseDown ? '1px solid rgba(222,222,222,1.0)' : '2px solid rgba(0, 0, 0, 0.226)',
-                            borderBottom: startButtonMouseDown ? '1px solid rgba(222,222,222,1.0)' : '2px solid rgba(0, 0, 0, 0.226)',
-                            }} onMouseDown={handleMouseDownStart} id='start'>
-                            <img id="windows-icon" src={windowsIcon}></img>
+                            borderTop: startPressed ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
+                            borderLeft: startPressed ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
+                            borderRight: startPressed ? '1px solid rgba(222,222,222,1.0)' : '2px solid rgba(0, 0, 0, 0.226)',
+                            borderBottom: startPressed ? '1px solid rgba(222,222,222,1.0)' : '2px solid rgba(0, 0, 0, 0.226)',
+                            }} id='start' >
+                            <img draggable='false' id="windows-icon" src={windowsIcon}></img>
                             <p id='start-text'>Start</p>
                         </div>
                     </div>

@@ -78,6 +78,7 @@
     height: auto;
     width: 33px;
     margin-right: 4px;
+    user-select: none;
 }
 
 .vertical-line-skinny {
