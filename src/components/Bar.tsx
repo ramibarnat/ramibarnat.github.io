@@ -5,21 +5,18 @@ import github from '../assets/github.gif'
 import { useState, useEffect, useRef } from 'react'
 
 function Bar() {
-    const [startButtonMouseDown, setStartButtonMouseDown] = useState(false);
     const [startPressed, setStartPressed] = useState(false);
     const startButtonRef = useRef(null);
 
     const handleMouseUp = (event: any) => {
         if (startButtonRef.current && !((startButtonRef.current as HTMLElement).contains(event.target))) {
             setStartPressed(false);
-            setStartButtonMouseDown(false);
         } 
     }
 
     const handleMouseDownStart = () => {
         if (!startPressed) {
             setStartPressed(true);
-            setStartButtonMouseDown(true);
         } else {
             setStartPressed(false);
         }
