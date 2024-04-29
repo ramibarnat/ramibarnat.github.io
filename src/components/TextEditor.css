@@ -1,6 +1,9 @@
 #text-editor-container {
     /* width: 70vw;
     height: 70vh; */
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: 2px;
     border-top: 1px solid rgba(139,139,139,255);
     border-left: 1px solid rgba(139,139,139,255);

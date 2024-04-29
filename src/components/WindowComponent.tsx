@@ -7,9 +7,11 @@ interface WindowComponentProps {
     children?: ReactNode;
     init_x?: number;
     init_y?: number;
+    init_width?: number;
+    init_height?: number;
 }
 
-function WindowComponent({children, init_x=0, init_y=0}: WindowComponentProps) {
+function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_height=400}: WindowComponentProps) {
     const [position, setPosition] = useState({x: init_x, y: init_y});
     const [mouseDownClose, setMouseDownClose] = useState("default");
     const [isVisible, setVisible] = useState(true);
@@ -67,7 +69,7 @@ function WindowComponent({children, init_x=0, init_y=0}: WindowComponentProps) {
     return (
         <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
         onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart}>
-            <div style={{display: isVisible ? 'flex' : 'none'}} className='default-outer-container' id='outer-window-container'>
+            <div style={{display: isVisible ? 'flex' : 'none', width: init_width, height: init_height}} className='default-outer-container' id='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
 
                     <div ref={dragHandleRef} id='window-top-bar'>
