@@ -1,0 +1,32 @@
+#text-editor-container {
+    width: 600px;
+    margin-top: 2px;
+    border-top: 1px solid rgba(139,139,139,255);
+    border-left: 1px solid rgba(139,139,139,255);
+    border-right: 1px solid rgba(246,246,246,255);
+    border-bottom: 1px solid rgba(246,246,246,255);
+    height: 700px;
+    font-family: 'MS-Sans-Serif-Bold';
+}
+
+#text-editor-inner {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(30,30,30,255);
+    border-left: 1px solid rgba(30,30,30,255);
+    border-right: 1px solid rgba(166,166,166,255);
+    border-bottom: 1px solid rgba(166,166,166,255);
+    background-color: rgba(255, 255, 255, 0.897);
+    overflow: scroll;
+}
+
+.project-title {
+    text-align: center;
+    margin: 0;
+}
+
+.project-body {
+    white-space: pre;
+    margin-left: 9px;
+}

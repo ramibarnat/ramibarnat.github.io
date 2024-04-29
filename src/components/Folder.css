@@ -1,4 +1,5 @@
 #folder-container {
+    position: absolute;
     display: flex;
     overflow-wrap: break-word;
     flex-direction: column;
@@ -8,8 +9,8 @@
     /* border: 2px solid green; */
 }
 
-#folder-container:hover {
-    cursor: grab;
+#folder-container:active {
+    cursor: grabbing;
 }
 
 #folder-image {

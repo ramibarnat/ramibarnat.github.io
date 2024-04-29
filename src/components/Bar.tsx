@@ -10,6 +10,9 @@ function Bar() {
     // We absolutely need this to ensure that the first click was on
     // the start button and not just anywhere on the screen
     const [mouseDownStart, setMouseDownStart] = useState(false);
+    if (false) { // This is used to supress the 'unused variable' warning for now
+        console.log(mouseDownStart);
+    }
     const startButtonRef = useRef(null);
 
     const handleMouseUp = (event: any) => {
