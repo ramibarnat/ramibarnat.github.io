@@ -16,7 +16,7 @@ function Folder({folder_name="New Folder", init_x=0, init_y=0}: FolderProps) {
     // that can be used in our handleClickOutside function
     const componentRef = useRef(null);
 
-    function handleClick() {
+    const handleClick = () => {
         setIsHighlighted((prevHighlighted) => {
             if (!prevHighlighted) {
                 return true;
@@ -48,7 +48,7 @@ function Folder({folder_name="New Folder", init_x=0, init_y=0}: FolderProps) {
     return (
         <Draggable bounds={"parent"} position={{x:position.x, y:position.y}} onDrag={handleDrag}
             onMouseDown={(event) => event.preventDefault()}>
-            <div ref={componentRef} onClick={handleClick} id='folder-container'>
+            <div ref={componentRef} onTouchStart={handleClick} onClick={handleClick} id='folder-container'>
                 <img id='folder-image' src={folder_img} />
                 <p style={{ 
                             backgroundColor: isHighlighted ? 'rgba(4, 2, 146, 0.979)' : 'transparent',

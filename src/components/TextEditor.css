@@ -1,11 +1,11 @@
 #text-editor-container {
-    width: 600px;
+    /* width: 70vw;
+    height: 70vh; */
     margin-top: 2px;
     border-top: 1px solid rgba(139,139,139,255);
     border-left: 1px solid rgba(139,139,139,255);
     border-right: 1px solid rgba(246,246,246,255);
     border-bottom: 1px solid rgba(246,246,246,255);
-    height: 700px;
     font-family: 'MS-Sans-Serif-Bold';
 }
 
@@ -24,9 +24,11 @@
 .project-title {
     text-align: center;
     margin: 0;
+    font-size: 1.5rem;
 }
 
 .project-body {
     white-space: pre;
     margin-left: 9px;
+    font-size: 0.9rem;
 }

@@ -28,7 +28,7 @@ function WindowComponent({children, init_x=0, init_y=0}: WindowComponentProps) {
     }
 
     const closeWindow = () => {
-        setVisible(false);
+        // setVisible(false);
     }
 
     const closeDown = () => {
@@ -40,8 +40,15 @@ function WindowComponent({children, init_x=0, init_y=0}: WindowComponentProps) {
     }
 
     const handleMouseUp = (event: any) => {
-        if (event.target !== closeButtonRef.current) {
+        if (closeButtonRef.current && !((closeButtonRef.current as HTMLElement).contains(event.target))) {
             setMouseDownClose("default");
+        } else {
+            setMouseDownClose((prev) => {
+                if (prev === "clicked") {
+                    setVisible(false);
+                }
+                return prev;
+            })
         }
     }
 
@@ -60,14 +67,14 @@ function WindowComponent({children, init_x=0, init_y=0}: WindowComponentProps) {
     return (
         <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
         onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart}>
-            <div style={{display: isVisible ? 'flex' : 'none'}}className='default-outer-container' id='outer-window-container'>
+            <div style={{display: isVisible ? 'flex' : 'none'}} className='default-outer-container' id='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
 
                     <div ref={dragHandleRef} id='window-top-bar'>
                         <div id='action-buttons'>
                             <div ref={closeButtonRef}
                             className={mouseDownClose + '-outer-container'}>
-                                <div onMouseUp={handleMouseUp} onMouseDown={closeDown} onClick={closeWindow} 
+                                <div onTouchStart={closeDown} onTouchEnd={handleMouseUp} onMouseDown={closeDown} onClick={closeWindow} 
                                 className={mouseDownClose + '-inner-container'} id='close-application'>
                                     <img id='close-icon' src={close} />
                                 </div>

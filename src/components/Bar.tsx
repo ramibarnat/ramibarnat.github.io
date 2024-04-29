@@ -25,31 +25,24 @@ function Bar() {
                 }
                 return false;
             })
-            // if (mouseDownStart) {
-            //     setStartPressed((previousState) => (!previousState));                
-            // } else if (startPressed) {
-            //     setStartPressed(false);
-            // }
         } 
         setMouseDownStart(false);
     }
 
     const handleMouseDownStart = () => {
         setMouseDownStart(() => {
-            console.log('mouse down start');
             return true;
         });
         setStartPressed((prev) => (!prev));
-        // if (!startPressed) {
-        //     setStartPressed(true);
-        // } else {
-        //     setStartPressed(false);
-        // }
     }
 
     useEffect(() => {
-        document.addEventListener('mouseup', handleMouseUp)
-        return () => document.removeEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mouseup', handleMouseUp);
+        // document.addEventListener('touchend', handleMouseUp);
+        return () => {
+            document.removeEventListener('mouseup', handleMouseUp);
+            // document.removeEventListener('touchend', handleMouseUp);
+        }
     }, []);
 
     return (

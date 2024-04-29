@@ -5,8 +5,11 @@ interface TextEditor {
 }
 
 function TextEditor() {
+    const init_width = .7 * window.innerWidth;
+    const init_height = .7 * window.innerHeight;
+
     return (
-        <div id='text-editor-container'>
+        <div style={{width: init_width, height: init_height}} id='text-editor-container'>
             <div id='text-editor-inner'>
                 <h1 className='project-title'>Batle.us</h1>
                 <p className='project-body'>
