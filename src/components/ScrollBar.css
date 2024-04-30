@@ -1,0 +1,20 @@
+#scroll-bar-margin {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+#scroll-bar-container {
+    box-sizing: border-box;
+    width: 22px;
+    height: 100%;
+    background-color: #fcfcfc;
+    background-image: linear-gradient(45deg, #d5d5d5 25%, transparent 25%), linear-gradient(-45deg, #d5d5d5 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #d5d5d5 75%), linear-gradient(-45deg, transparent 75%, #d5d5d5 75%);
+    background-size: 2px 2px;
+}
+
+#scroll-bar-thumb {
+    border: 1px solid red;
+    width: 100%;
+    height: 20px;
+    box-sizing: border-box;
+}
