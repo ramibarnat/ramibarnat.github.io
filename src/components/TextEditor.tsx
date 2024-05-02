@@ -2,20 +2,16 @@ import './TextEditor.css'
 import ScrollBar from './ScrollBar'
 import { useRef } from 'react'
 
-interface TextEditor {
-
-}
-
 function TextEditor() {
     const scrollableContentRef = useRef(null);
 
-    function handleScroll() {
-        console.log('scroll');
-    }
+    // function handleScroll() {
+    //     console.log('scroll');
+    // }
     return (
         <div id='text-editor-container'>
             <div id='text-body-container'>
-                <div onScroll={handleScroll} id='text-editor-inner' ref={scrollableContentRef}>
+                <div id='text-editor-inner' ref={scrollableContentRef}>
                     <div id='text-container'>
                         <h1 className='project-title'>Batle.us</h1>
                         <p className='project-body'>
@@ -29,7 +25,8 @@ function TextEditor() {
                             Here
                             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                             EA SPORTS<br/>
-                            in game
+                            in game<br/>
+                            yenno<br/>
                         </p>
                     </div>
                 </div>

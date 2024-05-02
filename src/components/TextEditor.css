@@ -4,7 +4,6 @@
     box-sizing: border-box;
     margin-top: 2px;
     display: flex;
-    /* overflow-wrap: break-word; */
     overflow: hidden;
 }
 
@@ -18,15 +17,12 @@
     border-right: 1px solid rgba(246,246,246,255);
     border-bottom: 1px solid rgba(246,246,246,255);
     font-family: 'MS-Sans-Serif-Bold';
-    /* justify-content: end; */
     display: flex;
 }
 
 #text-editor-inner {
     height: 100%;
     width: 100%;
-    /* justify-content: space-between;
-    flex-direction: row; */
     display: flex;
     box-sizing: border-box;
     border-top: 1px solid rgba(30,30,30,255);
@@ -39,7 +35,10 @@
 }
 
 #text-container {
-    margin-right: 22px;
+    height: fit-content;
+    margin-right: 25px; 
+    /*this prevents text from going behind scroll bar 
+    since scrollbar is absolutely positioned*/
 }
 
 .project-title {
