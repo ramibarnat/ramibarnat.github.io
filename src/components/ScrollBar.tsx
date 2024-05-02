@@ -1,5 +1,6 @@
 import './ScrollBar.css'
 import { useState, useRef} from 'react';
+import pyramid from '../assets/pyramid.png'
 
 function ScrollBar( content_ref: any ) {
     const [thumbTop, setThumbTop] = useState(0);
@@ -20,8 +21,20 @@ function ScrollBar( content_ref: any ) {
     return (
         <div id='scroll-bar-margin'>
             <div id='scroll-bar-container' onScroll={handleScroll}>
-                <div id='scroll-bar-thumb' style={{top: thumbTop}}>
-
+                <div className='outer-scroll-button'>
+                    <div className='inner-scroll-button' id='scroll-up'>
+                        <img className="pyramid" src={pyramid}></img>
+                    </div>
+                </div>
+                <div id='tread' style={{top: thumbTop}}>
+                    <div className='outer-scroll-button' id='scroll-bar-thumb-outer'>
+                        <div className='inner-scroll-button' id='scroll-bar-thumb-inner'></div>
+                    </div>
+                </div>
+                <div className='outer-scroll-button'>
+                    <div className='inner-scroll-button' id = 'scroll-down'>
+                        <img id='upside-down-pyramid' className="pyramid" src={pyramid}></img>
+                    </div>
                 </div>
             </div>
         </div> 

@@ -1,26 +1,82 @@
 #scroll-bar-margin {
     position: absolute;
-    right: 23px;
-    box-sizing: border-box;
-    height: calc(100% - 4px);
+    top: -1px;
+    right: 26px;
+    height: calc(100% - 2px);
 }
 
 #scroll-bar-container {
     /* height: calc(100% - 30px); */
+    display: flex;
+    flex-direction: column;
     height: 100%;
     margin-top: 2px;
     position: absolute;
     box-sizing: border-box;
-    width: 22px;
-    background-color: #fcfcfc;
-    background-image: linear-gradient(45deg, #d5d5d5 25%, transparent 25%), linear-gradient(-45deg, #d5d5d5 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #d5d5d5 75%), linear-gradient(-45deg, transparent 75%, #d5d5d5 75%);
-    background-size: 2px 2px;
+    width: 25px;
 }
 
-#scroll-bar-thumb {
+.outer-scroll-button {
     position: relative;
-    /* border: 1px solid red; */
-    width: 100%;
-    height: 20px;
     box-sizing: border-box;
+    width: 100%;
+    border-bottom: 2px solid rgb(26, 26, 26);
+    border-right: 2px solid rgb(26, 26, 26);
+    border-top: 1px solid rgba(194,197,202,1.0);
+    border-left: 1px solid rgba(194,197,202,1.0);
+    background-color: rgba(194,197,202,1.0);
+}
+
+.inner-scroll-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    border-top: 2px solid rgb(243, 243, 243);
+    border-left: 2px solid rgb(243, 243, 243);
+    border-bottom: 1px solid rgb(153, 153, 153);
+    border-right: 1px solid rgb(153, 153, 153);
+}
+
+#scroll-up {
+    height: 22px;
+    cursor: pointer;
+    /* margin-bottom: 1px; */
+}
+
+#scroll-down {
+    height: 22px;
+    cursor: pointer;
+}
+
+#scroll-bar-thumb-outer {
+    position: relative;
+    cursor: grab;
+}
+
+#scroll-bar-thumb-inner {
+    height: 70px;
+}
+
+#tread {
+    --dot-color: #bdbdbd;
+    background-color: #dadada5d;
+    background-image: linear-gradient(45deg, var(--dot-color) 25%, transparent 25%), linear-gradient(-45deg, var(--dot-color) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--dot-color) 75%), linear-gradient(-45deg, transparent 75%, var(--dot-color) 75%);
+    background-size: 3px 3px;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pyramid {
+    user-select: none;
+    width: 11px;
+    height: 7px;
+}
+
+#upside-down-pyramid {
+    rotate: 180deg;
 }
