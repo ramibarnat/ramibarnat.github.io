@@ -50,7 +50,7 @@ function ScrollBar( props: any ) {
     useEffect(() => {
         // setScrollRef(props.content_ref);
         if (scrollRef) {
-            const resizeObserver = new ResizeObserver((entries) => {
+            const resizeObserver = new ResizeObserver(() => {
                 handleResize();
             });
             
