@@ -20,8 +20,8 @@
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    border-bottom: 2px solid rgb(26, 26, 26);
-    border-right: 2px solid rgb(26, 26, 26);
+    border-bottom: 2px solid rgba(26, 26, 26, 0.878);
+    border-right: 2px solid rgba(26, 26, 26, 0.878);
     border-top: 1px solid rgba(194,197,202,1.0);
     border-left: 1px solid rgba(194,197,202,1.0);
     background-color: rgba(194,197,202,1.0);
