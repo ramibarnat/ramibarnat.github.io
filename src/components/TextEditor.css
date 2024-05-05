@@ -35,6 +35,8 @@
 }
 
 #text-container {
+    display: flex;
+    flex-direction: column;
     height: fit-content;
     margin-right: 25px; 
     /*this prevents text from going behind scroll bar 
@@ -52,4 +54,13 @@
     margin-left: 9px;
     font-size: 0.9rem;
     overflow-wrap: break-word;
+}
+
+.text-editor-image {
+    border: 2px solid rgb(199, 101, 4);
+    border-radius: 10px;
+    margin-left: 9px;
+    width: 500px;
+    height: auto;
+    max-width: 100%;
 }
