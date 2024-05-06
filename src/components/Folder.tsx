@@ -33,7 +33,7 @@ function Folder({
     }
     const newTimeout = setTimeout(() => {
       setClicks(0);
-    }, 1000)
+    }, 700)
     setTimeoutId(newTimeout);
 
     if (clicks >= 1) {

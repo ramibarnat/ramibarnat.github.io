@@ -113,7 +113,7 @@ function ScrollBar(props: any) {
   return (
     <div id="scroll-bar-margin">
       <div id="scroll-bar-container">
-        <div onClick={upButtonClick} className="outer-scroll-button">
+        <div onClick={upButtonClick} onTouchStart={upButtonClick} className="outer-scroll-button">
           <div className="inner-scroll-button" id="scroll-up">
             <img className="pyramid" src={pyramid}></img>
           </div>
@@ -129,7 +129,7 @@ function ScrollBar(props: any) {
               id="scroll-bar-thumb-inner"></div>
           </div>
         </div>
-        <div onClick={downButtonClick} className="outer-scroll-button">
+        <div onClick={downButtonClick} onTouchStart={downButtonClick} className="outer-scroll-button">
           <div className="inner-scroll-button" id="scroll-down">
             <img
               id="upside-down-pyramid"
