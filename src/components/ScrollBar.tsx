@@ -10,7 +10,7 @@ function ScrollBar(props: any) {
   const [thumbTop, setThumbTop] = useState(0);
 
   const handleScroll = () => {
-    var percentage_scrolled = 0;
+    let percentage_scrolled = 0;
     if (scrollRef.current) {
       percentage_scrolled = scrollRef.current.scrollTop / (scrollRef.current.scrollHeight - scrollRef.current.clientHeight);
     }
@@ -28,19 +28,64 @@ function ScrollBar(props: any) {
   const handleResize = () => {
     setThumbHeight((previous) => {
       if (scrollRef.current.clientHeight !== 0 && scrollRef.current.scrollHeight !== 0) {
-        // console.log(Math.round(scrollRef.current.clientHeight / scrollRef.current.scrollHeight * 100) + '%')
-        return (
-          Math.round((scrollRef.current.clientHeight / scrollRef.current.scrollHeight) * 100) + "%"
-        );
+        const new_height = Math.round((scrollRef.current.clientHeight / scrollRef.current.scrollHeight) * 100) + "%"
+        return new_height;
       }
       return previous;
     });
   };
 
+  const upButtonClick = () => {
+    if (thumbTop > 0 && scrollContainer.current) {
+        let outer_height= 1;
+        let thumb_height= 1;
+        let new_thumb_top: number;
+
+        if (scrollContainer.current) {
+            outer_height = (scrollContainer.current as HTMLElement).clientHeight
+            thumb_height = (scrollContainer.current as HTMLElement).children[0].clientHeight;
+        }
+        if (thumbTop < 10) {
+            new_thumb_top = 0;
+        } else { 
+            new_thumb_top = thumbTop - 10;
+        }
+        setThumbTop(new_thumb_top);
+
+        let percentage_scrolled = (new_thumb_top) / (outer_height-thumb_height);
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = (scrollRef.current.scrollHeight - scrollRef.current.clientHeight) * percentage_scrolled;
+        }
+    }
+  }
+
+  const downButtonClick = () => {
+    if (scrollContainer.current) {
+        let outer_height= 1;
+        let thumb_height= 1;
+        let new_thumb_top: number;
+
+        if (scrollContainer.current) {
+            outer_height = (scrollContainer.current as HTMLElement).clientHeight
+            thumb_height = (scrollContainer.current as HTMLElement).children[0].clientHeight;
+        }
+        if (thumbTop > outer_height-thumb_height-13) {
+            new_thumb_top = outer_height-thumb_height-3;
+        } else { 
+            new_thumb_top = thumbTop + 10;
+        }
+        setThumbTop(new_thumb_top);
+
+        let percentage_scrolled = (new_thumb_top + 3) / (outer_height-thumb_height);
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = (scrollRef.current.scrollHeight - scrollRef.current.clientHeight) * percentage_scrolled;
+        }
+    }
+  }
   useEffect(() => {
     // setScrollRef(props.content_ref);
-    handleResize();
-    if (scrollRef) {
+    // handleResize();
+    if (scrollRef.current) {
       const resizeObserver = new ResizeObserver(() => {
         handleResize();
       });
@@ -50,18 +95,25 @@ function ScrollBar(props: any) {
       }
 
       scrollRef.current.addEventListener("scroll", handleScroll);
+      
+
       return () => {
-        scrollRef.current.removeEventListener("scroll", handleScroll);
+        if (scrollRef.current) {
+            scrollRef.current.removeEventListener("scroll", handleScroll);
+        }
         resizeObserver.disconnect();
       };
     }
-  }, [scrollRef]);
+
+    
+
+  }, [scrollRef, scrollContainer]);
   // This creates a dependecy on the props.content_ref.current being loaded in order to load this hook
 
   return (
     <div id="scroll-bar-margin">
       <div id="scroll-bar-container">
-        <div className="outer-scroll-button">
+        <div onClick={upButtonClick} className="outer-scroll-button">
           <div className="inner-scroll-button" id="scroll-up">
             <img className="pyramid" src={pyramid}></img>
           </div>
@@ -77,7 +129,7 @@ function ScrollBar(props: any) {
               id="scroll-bar-thumb-inner"></div>
           </div>
         </div>
-        <div className="outer-scroll-button">
+        <div onClick={downButtonClick} className="outer-scroll-button">
           <div className="inner-scroll-button" id="scroll-down">
             <img
               id="upside-down-pyramid"

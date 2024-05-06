@@ -7,27 +7,27 @@ interface FolderProps {
   folder_name: string;
   init_x?: number;
   init_y?: number;
+  open_window: any;
 }
 
 function Folder({
   folder_name = "New Folder",
   init_x = 0,
   init_y = 0,
+  open_window,
 }: FolderProps) {
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [position, setPosition] = useState({ x: init_x, y: init_y });
-
+  const [id, setId] = useState("");
   // This hook will be used to create a reference to a DOM element
   // that can be used in our handleClickOutside function
   const componentRef = useRef(null);
 
-  const handleClick = () => {
-    setIsHighlighted((prevHighlighted) => {
-      if (!prevHighlighted) {
-        return true;
-      }
-      return false;
-    });
+  const handleClick = (event: any) => {
+    setIsHighlighted(true);
+    if (event.detail === 2) {
+      open_window({name: folder_name, id: id});
+    }
   };
 
   const handleOutsideClick = (event: any) => {
@@ -48,6 +48,14 @@ function Folder({
   };
 
   useEffect(() => {
+    setId(() => {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let res = ""
+      for (let i=0; i < 10; i++) {
+        res += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return res;
+    })
     document.addEventListener("click", handleOutsideClick);
 
     return () => document.removeEventListener("click", handleOutsideClick);
@@ -69,13 +77,9 @@ function Folder({
         <img id="folder-image" src={folder_img} />
         <p
           style={{
-            backgroundColor: isHighlighted
-              ? "rgba(4, 2, 146, 0.979)"
-              : "transparent",
+            backgroundColor: isHighlighted ? "rgba(4, 2, 146, 0.979)" : "transparent",
             color: isHighlighted ? "rgba(255, 255, 255, 0.95)" : "black",
-            borderColor: isHighlighted
-              ? "rgba(255, 255, 255, 0.85)"
-              : "transparent",
+            borderColor: isHighlighted ? "rgba(255, 255, 255, 0.85)" : "transparent",
           }}
           id="folder-name-text"
         >

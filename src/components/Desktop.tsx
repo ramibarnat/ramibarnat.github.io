@@ -2,14 +2,25 @@ import './Desktop.css'
 import Folder from './Folder'
 import WindowComponent from './WindowComponent';
 import TextEditor from './TextEditor';
-// import Draggable from 'react-draggable'
-
+import { useState } from 'react';
 
 function Desktop() {
     const init_x = .23 * window.innerWidth;
     const init_y = .15 * window.innerHeight;
     const init_height = .7 * window.innerHeight;
-    var init_width: number;
+    let init_width: number;
+    const [folders, setFolders] = useState([{name: "Projects", x: 30, y: 30}]);
+    const [windows, setWindows] = useState<any[]>([]);
+
+    const initWindow = (data: any) => {
+        setWindows([...windows, {id: data.id, name: data.name, x: init_x, y: init_y, 
+                    init_width: init_width, init_height: init_height}])
+    }
+
+    const closeWindow = (id: string) => {
+        setFolders(folders); // REMOVE ONCE WE HAVE A PLACE TO USE THIS, JUST PREVENTING WARNING FOR NOW
+        setWindows(windows.filter((window) => window.id !== id));
+    }
 
     if (window.innerWidth < 1000) {
         init_width = .7 * window.innerWidth;
@@ -20,10 +31,16 @@ function Desktop() {
 
     return (
         <div id="desktop-container">
-            <Folder folder_name="Projects" init_x={30} init_y={30}/>
-            <WindowComponent init_x={init_x} init_y={init_y} init_width={init_width} init_height={init_height}>
-                <TextEditor/>
-            </WindowComponent>
+            {folders.map((folder, index) => (
+                <Folder key={index} folder_name={folder.name} init_x={folder.x} init_y={folder.y} open_window={initWindow}/>
+            ))}
+            {windows.map((window, index) => (
+                <WindowComponent key={index} id={window.id} init_x={window.x} init_y={window.y} 
+                            init_width={window.init_width} init_height={window.init_height} close_window={closeWindow}>
+                    <TextEditor/>
+                </WindowComponent>
+            ))}
+            
         </div>
     )
 }

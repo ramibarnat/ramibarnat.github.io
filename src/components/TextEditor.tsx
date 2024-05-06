@@ -14,9 +14,9 @@ function TextEditor() {
       <div id="text-body-container">
         <div id="text-editor-inner" ref={scrollableContentRef}>
           <div id="text-container">
-            <h1 className="project-title">Batle.us</h1>
+            <h1 style={{ marginTop: 5 }} className="project-title">Batle.us</h1>
             <p style={{ marginBottom: 20 }} className="project-body">
-              I am currently developing a multiplayer game usingg. Angular, 
+              I am currently developing a multiplayer game using. Angular, 
                             Tailwind, Node.js, Express.js, and AWS along with libraries 
                             such as D3.js, three.js, and socket.io. Utilized Git for source 
                             control. (Link: {` `}
@@ -30,6 +30,9 @@ function TextEditor() {
               libraries and geojson data to allow users to guess the country on
               the globe.
             </p>
+            <hr className="text-editor-hr"/>
+            <h1 className="project-title">Driver Sleep Prevention</h1>
+
           </div>
         </div>
         <ScrollBar content_ref={scrollableContentRef} />

@@ -9,12 +9,14 @@ interface WindowComponentProps {
     init_y?: number;
     init_width?: number;
     init_height?: number;
+    id: string;
+    close_window: any;
 }
 
-function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_height=400}: WindowComponentProps) {
+function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_height=400, close_window, id}: WindowComponentProps) {
     const [position, setPosition] = useState({x: init_x, y: init_y});
     const [mouseDownClose, setMouseDownClose] = useState("default");
-    const [isVisible, setVisible] = useState(true);
+    // const [isVisible, setVisible] = useState(true);
 
     // This is used to ensure that the window can only be dragged
     // when the user tries to drag from this specified DOM element
@@ -27,10 +29,6 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
             x: position.x + data.deltaX,
             y: position.y + data.deltaY,
         });
-    }
-
-    const closeWindow = () => {
-        // setVisible(false);
     }
 
     const closeDown = () => {
@@ -47,7 +45,8 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
         } else {
             setMouseDownClose((prev) => {
                 if (prev === "clicked") {
-                    setVisible(false);
+                    close_window(id); // callback function to the Desktop component
+                    // setVisible(false);
                 }
                 return prev;
             })
@@ -69,14 +68,14 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
     return (
         <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
         onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart}>
-            <div style={{display: isVisible ? 'flex' : 'none', width: init_width, height: init_height}} className='default-outer-container' id='outer-window-container'>
+            <div style={{ width: init_width, height: init_height}} className='default-outer-container' id='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
 
                     <div ref={dragHandleRef} id='window-top-bar'>
                         <div id='action-buttons'>
                             <div ref={closeButtonRef}
                             className={mouseDownClose + '-outer-container'}>
-                                <div onTouchStart={closeDown} onTouchEnd={handleMouseUp} onMouseDown={closeDown} onClick={closeWindow} 
+                                <div onTouchStart={closeDown} onTouchEnd={handleMouseUp} onMouseDown={closeDown} 
                                 className={mouseDownClose + '-inner-container'} id='close-application'>
                                     <img id='close-icon' src={close} />
                                 </div>
