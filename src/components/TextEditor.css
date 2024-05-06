@@ -45,6 +45,7 @@
 
 .project-title {
     margin-left: 9px;
+    margin-bottom: 12px;
     margin-top: 0;
     font-size: 1.5rem;
 }
@@ -57,11 +58,27 @@
 }
 
 .text-editor-image {
-    border: 2px solid rgb(199, 101, 4);
     border-radius: 10px;
     margin-left: 9px;
     width: 80%;
     height: auto;
+}
+
+#batle_image {
+    border: 2px solid rgb(199, 101, 4);
+}
+
+.text-editor-video {
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    margin-left: 9px;
+    width: 80%;
+    height: auto;
+}
+
+#sleep-prevent-vid {
+    border: 2px solid rgb(31, 168, 202);
 }
 
 .text-editor-hr {
@@ -73,8 +90,34 @@
     border-bottom: 2px solid black;
 }
 
+#pokedex {
+    border: 2px solid rgb(250, 124, 124);
+    border-radius: 10px;
+    margin-left: 9px;
+    margin-bottom: 20px;
+    width: 92%;
+    /* height: 300px; */
+}
+
+#ps-dashboard {
+    display: none;
+}
+
+#pokedex-image {
+    display: none;
+    border: 2px solid rgb(250, 124, 124);
+}
+
 @media (max-width: 480px) {
-    .text-editor-image {
-        width: 90%;
+    #ps-dashboard {
+        display: block;
+        color: red;
+    }
+    #pokedex {
+        display: none;
+    }
+    #pokedex-image {
+        display: block;
     }
 }
+

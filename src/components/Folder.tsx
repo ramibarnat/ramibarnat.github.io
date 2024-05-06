@@ -16,6 +16,8 @@ function Folder({
   init_y = 0,
   open_window,
 }: FolderProps) {
+  const [clicks, setClicks] = useState(0);
+  const [timeoutId, setTimeoutId] = useState(-1)
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [position, setPosition] = useState({ x: init_x, y: init_y });
   const [id, setId] = useState("");
@@ -23,11 +25,24 @@ function Folder({
   // that can be used in our handleClickOutside function
   const componentRef = useRef(null);
 
-  const handleClick = (event: any) => {
+  const handleClick = () => {
     setIsHighlighted(true);
-    if (event.detail === 2) {
+    setClicks(clicks + 1);
+    if (timeoutId !== -1) {
+      clearTimeout(timeoutId);
+    }
+    const newTimeout = setTimeout(() => {
+      setClicks(0);
+    }, 1000)
+    setTimeoutId(newTimeout);
+
+    if (clicks >= 1) {
+      setClicks(0);
       open_window({name: folder_name, id: id});
     }
+    // if (event.detail === 2) {
+    //   open_window({name: folder_name, id: id});
+    // }
   };
 
   const handleOutsideClick = (event: any) => {

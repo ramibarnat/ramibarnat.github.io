@@ -13,8 +13,10 @@ function Desktop() {
     const [windows, setWindows] = useState<any[]>([]);
 
     const initWindow = (data: any) => {
-        setWindows([...windows, {id: data.id, name: data.name, x: init_x, y: init_y, 
-                    init_width: init_width, init_height: init_height}])
+        if (!windows.find(object => object.id === data.id)) {
+            setWindows([...windows, {id: data.id, name: data.name, x: init_x, y: init_y, 
+                init_width: init_width, init_height: init_height}]) 
+        }
     }
 
     const closeWindow = (id: string) => {
@@ -23,12 +25,17 @@ function Desktop() {
     }
 
     if (window.innerWidth < 1000) {
-        init_width = .7 * window.innerWidth;
+        init_width = .75 * window.innerWidth;
     } else {
         init_width = .45 * window.innerWidth;
     }
-    
 
+    // useEffect(() => {
+    //     handleResize();
+    //     window.addEventListener('resize', handleResize);
+    //     return () => window.removeEventListener('resize', handleResize)
+    // }, [])
+    
     return (
         <div id="desktop-container">
             {folders.map((folder, index) => (
