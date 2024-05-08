@@ -36,12 +36,34 @@ function Bar() {
         setStartPressed((prev) => (!prev));
     }
 
+    const getTime = () => {
+        const date = new Date();
+        const hour = date.getHours();
+        let minute = date.getMinutes().toString();
+        if (Number(minute) < 10) {
+            minute = minute.padStart(2, "0");
+        }
+        let current_time = "";
+        
+        if (hour >= 12) {
+            current_time += (hour-12).toString() + ":" + minute + ' PM';
+        } else {
+            current_time += hour.toString() + ":" + minute + ' AM';
+        }
+        return current_time;
+    }
+
+    const [currentTime, setCurrentTime] = useState(getTime());
+
     useEffect(() => {
+        const intervalId = setInterval(() => {
+            setCurrentTime(getTime());
+        }, 1000) // Update every 2 seconds
+
         document.addEventListener('mouseup', handleMouseUp);
-        // document.addEventListener('touchend', handleMouseUp);
         return () => {
             document.removeEventListener('mouseup', handleMouseUp);
-            // document.removeEventListener('touchend', handleMouseUp);
+            clearInterval(intervalId);
         }
     }, []);
 
@@ -78,6 +100,12 @@ function Bar() {
                     </a>
                     <div id='after-skinny' className='vertical-line-skinny' />
                     <div id='after-fat' className='vertical-line-fat' />
+                </div>
+                <div id='right-side-task-menu'>
+                    <div className='vertical-line-skinny'/>
+                    <div id='clock-container'>
+                        <p id='time'>{currentTime}</p>
+                    </div>    
                 </div>
             </div>
         </div>
