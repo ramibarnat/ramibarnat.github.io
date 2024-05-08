@@ -2,12 +2,7 @@ import './Desktop.css'
 import Folder from './Folder'
 import WindowComponent from './WindowComponent';
 import TextEditor from './TextEditor';
-import { useState, createContext } from 'react';
-
-const ScrollContext = createContext({
-    isScrolling: false,
-    setIsScrolling: () => {},
-})
+import { useState } from 'react';
 
 function Desktop() {
     const init_x = .23 * window.innerWidth;

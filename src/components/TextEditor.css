@@ -32,8 +32,7 @@
     background-color: rgba(255, 255, 255, 0.897);
     scrollbar-width: none;
     overflow-y: auto;
-    /* -webkit-overflow-scrolling: touch;
-    touch-action: cross-slide-y; */
+    touch-action: pan-y;
 }
 
 #text-container {

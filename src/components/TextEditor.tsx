@@ -5,7 +5,6 @@ import sleep_prevent from "../assets/sleep_prevention.mp4"
 import pokedex from "../assets/pokedex_img.png"
 import { useEffect, useRef, useState } from "react";
 
-
 function TextEditor() {
   const scrollableContentRef = useRef(null);
   const pokedexRef = useRef(null);
@@ -13,9 +12,14 @@ function TextEditor() {
 
   function handleResize() {
     if (pokedexRef.current) {
-      console.log((pokedexRef.current as HTMLElement).clientWidth);
       setPokedexHeight((pokedexRef.current as HTMLElement).clientWidth * 405/600);
     }
+  }
+
+  const stopDrag = (event: any) => {
+    // event.preventDefault();
+    event.stopPropagation();
+    console.log('hey');
   }
   
   useEffect(() => {
@@ -25,7 +29,7 @@ function TextEditor() {
   return (
     <div id="text-editor-container">
       <div id="text-body-container">
-        <div id="text-editor-inner" ref={scrollableContentRef}>
+        <div onTouchStartCapture={stopDrag} id="text-editor-inner" ref={scrollableContentRef}>
           <div id="text-container">
             <h1 style={{ marginTop: 5 }} className="project-title">Batle.us</h1>
             <p  className="project-body">

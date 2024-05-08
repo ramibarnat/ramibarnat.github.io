@@ -58,6 +58,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
             event.preventDefault();
             return false;
         }
+
     }
 
     useEffect(() => {
@@ -70,7 +71,6 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
         onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart}>
             <div style={{ width: init_width, height: init_height}} className='default-outer-container' id='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
-
                     <div ref={dragHandleRef} id='window-top-bar'>
                         <div id='action-buttons'>
                             <div ref={closeButtonRef}
