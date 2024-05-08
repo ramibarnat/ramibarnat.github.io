@@ -17,7 +17,7 @@ function Folder({
   open_window,
 }: FolderProps) {
   const [clicks, setClicks] = useState(0);
-  const [timeoutId, setTimeoutId] = useState(-1)
+  const [timeoutId, setTimeoutId] = useState<any>(-1)
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [position, setPosition] = useState({ x: init_x, y: init_y });
   const [id, setId] = useState("");

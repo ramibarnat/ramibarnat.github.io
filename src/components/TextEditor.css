@@ -31,8 +31,9 @@
     border-bottom: 1px solid rgba(166,166,166,255);
     background-color: rgba(255, 255, 255, 0.897);
     scrollbar-width: none;
-    overflow-y: scroll;
-    /* -webkit-overflow-scrolling: touch; */
+    overflow-y: auto;
+    /* -webkit-overflow-scrolling: touch;
+    touch-action: cross-slide-y; */
 }
 
 #text-container {

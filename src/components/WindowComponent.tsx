@@ -1,4 +1,4 @@
-import { ReactNode, useState, useRef, useEffect} from 'react';
+import { ReactNode, useState, useRef, useEffect } from 'react';
 import './WindowComponent.css'
 import Draggable from 'react-draggable'
 import close from '../assets/x_icon.png'
@@ -16,8 +16,8 @@ interface WindowComponentProps {
 function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_height=400, close_window, id}: WindowComponentProps) {
     const [position, setPosition] = useState({x: init_x, y: init_y});
     const [mouseDownClose, setMouseDownClose] = useState("default");
-    // const [isVisible, setVisible] = useState(true);
-
+    // const [isScrolling, setIsScrolling] = useState(false);
+    
     // This is used to ensure that the window can only be dragged
     // when the user tries to drag from this specified DOM element
     const dragHandleRef = useRef(null);
@@ -82,7 +82,6 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
                             </div>
                         </div>
                     </div>
-
                     {children}
                 </div>
             </div>
