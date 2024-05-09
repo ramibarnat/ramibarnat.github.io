@@ -40,17 +40,15 @@ function Bar() {
         const date = new Date();
         const hour = date.getHours();
         let minute = date.getMinutes().toString();
+
         if (Number(minute) < 10) {
-            minute = minute.padStart(2, "0");
+            minute = "0" + minute;
         }
-        let current_time = "";
-        
         if (hour >= 12) {
-            current_time += (hour-12).toString() + ":" + minute + ' PM';
-        } else {
-            current_time += hour.toString() + ":" + minute + ' AM';
+            return `${hour-12}:${minute} PM`
         }
-        return current_time;
+        return `${hour}:${minute} AM`
+        
     }
 
     const [currentTime, setCurrentTime] = useState(getTime());
