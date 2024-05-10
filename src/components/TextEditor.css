@@ -59,20 +59,18 @@
 }
 
 .text-editor-image {
-    border-radius: 10px;
     margin-left: 9px;
     width: 80%;
     height: auto;
 }
 
 #batle_image {
-    border: 2px solid rgb(199, 101, 4);
+    border: 2px solid rgb(116, 60, 4);
 }
 
 .text-editor-video {
     box-sizing: border-box;
     margin-bottom: 20px;
-    border-radius: 10px;
     margin-left: 9px;
     width: 80%;
     height: auto;
@@ -93,7 +91,6 @@
 
 #pokedex {
     border: 2px solid rgb(250, 124, 124);
-    border-radius: 10px;
     margin-left: 9px;
     margin-bottom: 20px;
     width: 92%;

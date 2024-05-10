@@ -17,7 +17,6 @@ function TextEditor() {
   }
 
   const stopDrag = (event: any) => {
-    // event.preventDefault();
     event.stopPropagation();
     console.log('hey');
   }

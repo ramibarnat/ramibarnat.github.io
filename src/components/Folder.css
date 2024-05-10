@@ -14,19 +14,20 @@
 } */
 
 #folder-image {
-    width: 56px;
+    width: 48px;
     height: auto;
     user-select: none;
 }
 
 #folder-name-text {
+    font-size: 15px;
     max-width: 66px;
     width: fit-content;
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 1px;
     padding-left: 1px; 
-    margin-top: 9px;
+    margin-top: 8px;
     margin-bottom: 0;
     line-height: 19px;
     font-family: "MS-Sans-Serif";

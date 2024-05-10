@@ -1,4 +1,4 @@
-import folder_img from "../assets/folder_icon.png";
+import folder_img from "../assets/filled_folder.png";
 import { useState, useRef, useEffect } from "react";
 import "./Folder.css";
 import Draggable from "react-draggable";

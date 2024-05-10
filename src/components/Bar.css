@@ -36,7 +36,7 @@
 }
 
 #right-side-task-menu {
-    margin-right: 5px;
+    margin-right: 4px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -61,7 +61,7 @@
 #start-container {
     width: fit-content;
     height: fit-content;
-    margin-left: 3px;
+    margin-left: 4px;
 }
 
 #start {
