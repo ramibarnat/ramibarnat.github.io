@@ -1,11 +1,13 @@
 import './Bar.css'
-import windowsIcon from '../assets/windows_icon.png'
-import linkedin from '../assets/linkedin.png'
-import github from '../assets/github.gif'
+import Tab from './Tab'
+import windowsIcon from '../../assets/windows_icon.png'
+import linkedin from '../../assets/linkedin.png'
+import github from '../../assets/github.gif'
 import { useState, useEffect, useRef } from 'react'
 
 function Bar() {
     const [startPressed, setStartPressed] = useState(false);
+    const [tabs, setTabs] = useState<any[]>([]);
 
     // We absolutely need this to ensure that the first click was on
     // the start button and not just anywhere on the screen
@@ -81,8 +83,8 @@ function Bar() {
                         <div style={{
                             borderTop: startPressed ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
                             borderLeft: startPressed ? '1px solid rgba(0, 0, 0, 0.226)' : '1px solid rgba(222,222,222,1.0)',
-                            borderRight: startPressed ? '1px solid rgba(222,222,222,1.0)' : '2px solid rgba(0, 0, 0, 0.226)',
-                            borderBottom: startPressed ? '1px solid rgba(222,222,222,1.0)' : '2px solid rgba(0, 0, 0, 0.226)',
+                            borderRight: startPressed ? '1px solid rgba(222,222,222,1.0)' : '1px solid rgba(0, 0, 0, 0.226)',
+                            borderBottom: startPressed ? '1px solid rgba(222,222,222,1.0)' : '1px solid rgba(0, 0, 0, 0.226)',
                             }} id='start' >
                             <img draggable='false' id="windows-icon" src={windowsIcon}></img>
                             <p id='start-text'>Start</p>
@@ -98,6 +100,9 @@ function Bar() {
                     </a>
                     <div id='after-skinny' className='vertical-line-skinny' />
                     <div id='after-fat' className='vertical-line-fat' />
+                    {tabs.map((tab, index) => (
+                        <Tab key={index} />
+                    ))}
                 </div>
                 <div id='right-side-task-menu'>
                     <div className='vertical-line-skinny'/>

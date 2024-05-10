@@ -1,7 +1,7 @@
 import './Desktop.css'
-import Folder from './Folder'
-import WindowComponent from './WindowComponent';
-import TextEditor from './TextEditor';
+import Folder from './Apps/Folder'
+import WindowComponent from './Windows/WindowComponent';
+import TextEditor from './Windows/TextEditor';
 import { useState } from 'react';
 
 function Desktop() {

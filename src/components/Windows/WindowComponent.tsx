@@ -1,7 +1,7 @@
 import { ReactNode, useState, useRef, useEffect } from 'react';
 import './WindowComponent.css'
 import Draggable from 'react-draggable'
-import close from '../assets/x_icon.png'
+import close from '../../assets/x_icon.png'
 
 interface WindowComponentProps {
     children?: ReactNode;

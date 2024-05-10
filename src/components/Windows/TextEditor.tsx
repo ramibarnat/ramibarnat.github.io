@@ -1,8 +1,8 @@
 import "./TextEditor.css";
 import ScrollBar from "./ScrollBar";
-import batle from "../assets/batle_screen.png";
-import sleep_prevent from "../assets/sleep_prevention.mp4"
-import pokedex from "../assets/pokedex_img.png"
+import batle from "../../assets/batle_screen.png";
+import sleep_prevent from "../../assets/sleep_prevention.mp4"
+import pokedex from "../../assets/pokedex_img.png"
 import { useEffect, useRef, useState } from "react";
 
 function TextEditor() {
@@ -17,8 +17,11 @@ function TextEditor() {
   }
 
   const stopDrag = (event: any) => {
-    event.stopPropagation();
-    console.log('hey');
+    // This is extremeley important for allowing scrolling on 
+    // touch devices. It prevents the dragging from initiating.
+    // onTouchStartCapture event is requried in order to bubble
+    // from the parent down to the child.
+    event.stopPropagation(); 
   }
   
   useEffect(() => {

@@ -1,6 +1,6 @@
 import "./ScrollBar.css";
 import { useState, useEffect, useRef } from "react";
-import pyramid from "../assets/pyramid.png";
+import pyramid from "../../assets/pyramid.png";
 import ResizeObserver from "resize-observer-polyfill";
 
 function ScrollBar(props: any) {
