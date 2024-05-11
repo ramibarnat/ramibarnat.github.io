@@ -29,12 +29,6 @@ function Desktop() {
     } else {
         init_width = .45 * window.innerWidth;
     }
-
-    // useEffect(() => {
-    //     handleResize();
-    //     window.addEventListener('resize', handleResize);
-    //     return () => window.removeEventListener('resize', handleResize)
-    // }, [])
     
     return (
         <div id="desktop-container">

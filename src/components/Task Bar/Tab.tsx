@@ -1,8 +1,14 @@
+import './Tab.css'
 
-function Tab() {
+interface TabProps {
+    name: string;
+}
+function Tab({name}: TabProps) {
     return (
-        <div>
-
+        <div className="tab-container">
+            <div>
+                
+            </div>
         </div>
     )
 }

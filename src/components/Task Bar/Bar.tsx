@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from 'react'
 
 function Bar() {
     const [startPressed, setStartPressed] = useState(false);
-    const [tabs, setTabs] = useState<any[]>([]);
+    const [tabs, setTabs] = useState<any[]>([{name: "testing"}]);
 
     // We absolutely need this to ensure that the first click was on
     // the start button and not just anywhere on the screen
@@ -101,7 +101,7 @@ function Bar() {
                     <div id='after-skinny' className='vertical-line-skinny' />
                     <div id='after-fat' className='vertical-line-fat' />
                     {tabs.map((tab, index) => (
-                        <Tab key={index} />
+                        <Tab key={index} name={tab.name} />
                     ))}
                 </div>
                 <div id='right-side-task-menu'>
