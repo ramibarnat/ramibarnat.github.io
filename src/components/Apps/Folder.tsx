@@ -1,7 +1,8 @@
 import folder_img from "../../assets/filled_folder.png";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import "./Folder.css";
 import Draggable from "react-draggable";
+import { TabContext } from "../Task Bar/TabContext";
 
 interface FolderProps {
   folder_name: string;
@@ -16,6 +17,7 @@ function Folder({
   init_y = 0,
   open_window,
 }: FolderProps) {
+  const { setTabs } = useContext(TabContext);
   const [clicks, setClicks] = useState(0);
   const [timeoutId, setTimeoutId] = useState<any>(-1)
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -39,6 +41,12 @@ function Folder({
     if (clicks >= 1) {
       setClicks(0);
       open_window({name: folder_name, id: id});
+      setTabs((prev) => {
+        if (!prev.find(object => object.id === id)) {
+          return [...prev, {name: folder_name, id: id}];
+        } 
+        return prev;
+      })
     }
     // if (event.detail === 2) {
     //   open_window({name: folder_name, id: id});

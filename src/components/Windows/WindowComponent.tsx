@@ -1,7 +1,8 @@
-import { ReactNode, useState, useRef, useEffect } from 'react';
+import { ReactNode, useState, useRef, useEffect, useContext } from 'react';
 import './WindowComponent.css'
 import Draggable from 'react-draggable'
 import close from '../../assets/x_icon.png'
+import { TabContext } from '../Task Bar/TabContext';
 
 interface WindowComponentProps {
     children?: ReactNode;
@@ -14,6 +15,7 @@ interface WindowComponentProps {
 }
 
 function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_height=400, close_window, id}: WindowComponentProps) {
+    const { setTabs } = useContext(TabContext);
     const [position, setPosition] = useState({x: init_x, y: init_y});
     const [mouseDownClose, setMouseDownClose] = useState("default");
     // const [isScrolling, setIsScrolling] = useState(false);
@@ -46,7 +48,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
             setMouseDownClose((prev) => {
                 if (prev === "clicked") {
                     close_window(id); // callback function to the Desktop component
-                    // setVisible(false);
+                    setTabs((prev) => prev.filter((val) => val.id !== id))
                 }
                 return prev;
             })

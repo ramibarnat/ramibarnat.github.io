@@ -7,8 +7,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import { TabContext } from './TabContext';
 
 function Bar() {
-    // const tabs = useContext(TabContext);
-    const tabs = useContext(TabContext);
+    const { tabs } = useContext(TabContext);
 
     console.log(tabs);
     const [startPressed, setStartPressed] = useState(false);
@@ -103,9 +102,9 @@ function Bar() {
                     </a>
                     <div id='after-skinny' className='vertical-line-skinny' />
                     <div id='after-fat' className='vertical-line-fat' />
-                    {/* {tabs.map((tab: any) => (
+                    {tabs.map((tab: any) => (
                         <Tab name={tab.name} />
-                    ))} */}
+                    ))}
                 </div>
                 <div id='right-side-task-menu'>
                     <div className='vertical-line-skinny'/>
