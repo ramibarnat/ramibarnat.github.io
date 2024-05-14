@@ -3,12 +3,15 @@ import Tab from './Tab'
 import windowsIcon from '../../assets/windows_icon.png'
 import linkedin from '../../assets/linkedin.png'
 import github from '../../assets/github.gif'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
+import { TabContext } from './TabContext';
 
 function Bar() {
-    const [startPressed, setStartPressed] = useState(false);
-    const [tabs, setTabs] = useState<any[]>([{name: "testing"}]);
+    // const tabs = useContext(TabContext);
+    const tabs = useContext(TabContext);
 
+    console.log(tabs);
+    const [startPressed, setStartPressed] = useState(false);
     // We absolutely need this to ensure that the first click was on
     // the start button and not just anywhere on the screen
     const [mouseDownStart, setMouseDownStart] = useState(false);
@@ -100,9 +103,9 @@ function Bar() {
                     </a>
                     <div id='after-skinny' className='vertical-line-skinny' />
                     <div id='after-fat' className='vertical-line-fat' />
-                    {tabs.map((tab, index) => (
-                        <Tab key={index} name={tab.name} />
-                    ))}
+                    {/* {tabs.map((tab: any) => (
+                        <Tab name={tab.name} />
+                    ))} */}
                 </div>
                 <div id='right-side-task-menu'>
                     <div className='vertical-line-skinny'/>
