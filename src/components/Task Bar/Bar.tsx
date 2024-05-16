@@ -79,7 +79,6 @@ function Bar() {
                         borderLeft: startPressed ? '2px solid rgba(14, 13, 13, 0.781)' : '1px solid rgba(255, 255, 255, 0.959)',
                         borderRight: startPressed ? '1px solid rgba(255, 255, 255, 0.959)' : '2px solid rgba(14, 13, 13, 0.781)',
                         borderBottom: startPressed ? '1px solid rgba(255, 255, 255, 0.959)' : '2px solid rgba(14, 13, 13, 0.781)',
-                        marginRight: startPressed ? '1px' : '0px',
                         marginTop: startPressed ? '1px' : '0px',
                         }} ref={startButtonRef} draggable='false' id="start-container" onMouseDown={handleMouseDownStart} >
                         <div style={{

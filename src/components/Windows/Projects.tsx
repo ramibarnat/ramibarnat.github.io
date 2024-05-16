@@ -1,4 +1,4 @@
-import "./TextEditor.css";
+import "./Projects.css";
 import ScrollBar from "./ScrollBar";
 import batle from "../../assets/batle_screen.png";
 import sleep_prevent from "../../assets/sleep_prevention.mp4"

@@ -1,4 +1,5 @@
 .tab-container {
+    overflow: hidden;
     display: flex;
     align-items: center;
     text-align: start;
@@ -13,6 +14,12 @@
     height: 23px;
     width: 150px;
     cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .tab-container {
+        display: none;
+    }
 }
 
 .tab-title {

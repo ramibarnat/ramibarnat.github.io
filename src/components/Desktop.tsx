@@ -1,7 +1,7 @@
 import './Desktop.css'
 import Folder from './Apps/Folder'
 import WindowComponent from './Windows/WindowComponent';
-import TextEditor from './Windows/TextEditor';
+import Projects from './Windows/Projects';
 import { useState } from 'react';
 
 function Desktop() {
@@ -38,7 +38,7 @@ function Desktop() {
             {windows.map((window, index) => (
                 <WindowComponent key={index} id={window.id} init_x={window.x} init_y={window.y} 
                             init_width={window.init_width} init_height={window.init_height} close_window={closeWindow}>
-                    <TextEditor/>
+                    <Projects/>
                 </WindowComponent>
             ))}
             

@@ -43,12 +43,15 @@
 }
 
 #clock-container {
+    min-width: 53px;
+    overflow: hidden;
     position: relative;
     margin-left: 3px;
     padding-left: 8px;
     padding-right: 8px;
     height: 24px;
     display: flex;
+    /* flex: 0 0 auto; */
     flex-direction: row;
     align-items: center;    
     border-top: 1px solid rgba(51, 51, 51, 0.384);
@@ -56,6 +59,11 @@
     box-shadow: inset 1px 1px 0px 0px rgba(51, 51, 51, 0.301);
     border-right: 2px solid var(--task-bar-white);
     border-bottom: 2px solid var(--task-bar-white);
+}
+
+#time {
+    margin: 0;
+    font-size: 14px;
 }
 
 #start-container {
@@ -148,9 +156,4 @@
     height: 24px;
     width: 24px;
     margin-left: 12px;
-}
-
-#time {
-    margin: 0;
-    font-size: 14px;
 }

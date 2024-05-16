@@ -1,22 +1,24 @@
-import folder_img from "../../assets/filled_folder.png";
 import { useState, useRef, useEffect, useContext } from "react";
 import "./Folder.css";
 import Draggable from "react-draggable";
 import { TabContext } from "../Task Bar/TabContext";
 
-interface FolderProps {
-  folder_name: string;
-  init_x?: number;
-  init_y?: number;
-  open_window: any;
+interface AppProps {
+  type: 'folder' | ''
+  name: string,
+  init_x?: number,
+  init_y?: number,
+  open_window: any,
+  app_img: any,
 }
 
-function Folder({
-  folder_name = "New Folder",
+function App({
+  name = "New App",
   init_x = 0,
   init_y = 0,
   open_window,
-}: FolderProps) {
+  app_img,
+}: AppProps) {
   const { setTabs } = useContext(TabContext);
   const [clicks, setClicks] = useState(0);
   const [timeoutId, setTimeoutId] = useState<any>(-1);
@@ -40,10 +42,10 @@ function Folder({
 
     if (clicks >= 1) {
       setClicks(0);
-      open_window({name: folder_name, id: id});
+      open_window({name: name, id: id});
       setTabs((prev) => {
         if (!prev.find(object => object.id === id)) {
-          return [...prev, {name: folder_name, id: id}];
+          return [...prev, {name: name, id: id}];
         } 
         return prev;
       })
@@ -89,28 +91,25 @@ function Folder({
       bounds={"parent"}
       position={{ x: position.x, y: position.y }}
       onDrag={handleDrag}
-      onMouseDown={(event) => event.preventDefault()}
-    >
+      onMouseDown={(event) => event.preventDefault()}>
       <div
         ref={componentRef}
         onTouchStart={handleClick}
         onClick={handleClick}
-        id="folder-container"
-      >
-        <img id="folder-image" src={folder_img} />
+        id="folder-container">
+        <img id="folder-image" src={app_img} />
         <p
           style={{
             backgroundColor: isHighlighted ? "rgba(4, 2, 146, 0.979)" : "transparent",
             color: isHighlighted ? "rgba(255, 255, 255, 0.95)" : "black",
             borderColor: isHighlighted ? "rgba(255, 255, 255, 0.85)" : "transparent",
           }}
-          id="folder-name-text"
-        >
-          {folder_name}
+          id="folder-name-text">
+          {name}
         </p>
       </div>
     </Draggable>
   );
 }
 
-export default Folder;
+export default App;
