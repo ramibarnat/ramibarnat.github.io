@@ -1,22 +1,21 @@
 import { useState, useRef, useEffect, useContext } from "react";
-import "./Folder.css";
+import "./App.css";
 import Draggable from "react-draggable";
 import { TabContext } from "../Task Bar/TabContext";
 
 interface AppProps {
-  type: 'folder' | ''
-  name: string,
+  type: 'folder' | 'projects' | 'text',
+  name?: string,
   init_x?: number,
   init_y?: number,
-  open_window: any,
   app_img: any,
 }
 
 function App({
+  type,
   name = "New App",
   init_x = 0,
   init_y = 0,
-  open_window,
   app_img,
 }: AppProps) {
   const { setTabs } = useContext(TabContext);
@@ -42,17 +41,13 @@ function App({
 
     if (clicks >= 1) {
       setClicks(0);
-      open_window({name: name, id: id});
       setTabs((prev) => {
         if (!prev.find(object => object.id === id)) {
-          return [...prev, {name: name, id: id}];
+          return [...prev, {name: name, id: id, type: type}];
         } 
         return prev;
       })
     }
-    // if (event.detail === 2) {
-    //   open_window({name: folder_name, id: id});
-    // }
   };
 
   const handleOutsideClick = (event: any) => {
@@ -65,7 +60,7 @@ function App({
   };
 
   const handleDrag = (event: any, data: any) => {
-    event = event; // prevents error, fix this later
+    event = event; // prevents warning, fix this later
     setPosition({
       x: position.x + data.deltaX,
       y: position.y + data.deltaY,

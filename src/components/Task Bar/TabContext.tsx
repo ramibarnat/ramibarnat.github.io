@@ -1,8 +1,9 @@
 import { Dispatch, FC, ReactNode, SetStateAction, createContext, useState } from "react";
 
 interface TabObject {
-    name: string;
-    id: string;
+    name: string,
+    id: string,
+    type: string,
 }
 
 interface TabContextType {

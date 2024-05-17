@@ -1,5 +1,5 @@
 import "./Projects.css";
-import ScrollBar from "./ScrollBar";
+import ScrollBar from "../Windows/ScrollBar";
 import batle from "../../assets/batle_screen.png";
 import sleep_prevent from "../../assets/sleep_prevention.mp4"
 import pokedex from "../../assets/pokedex_img.png"

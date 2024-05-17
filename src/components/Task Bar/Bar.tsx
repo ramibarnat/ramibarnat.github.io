@@ -9,7 +9,6 @@ import { TabContext } from './TabContext';
 function Bar() {
     const { tabs } = useContext(TabContext);
 
-    console.log(tabs);
     const [startPressed, setStartPressed] = useState(false);
     // We absolutely need this to ensure that the first click was on
     // the start button and not just anywhere on the screen
