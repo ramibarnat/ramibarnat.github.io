@@ -1,6 +1,6 @@
 #bar-container {
     width: 100%;
-    height: 48px;
+    height: 38px;
     background-color: rgba(194,197,202,1.0);
     /* background-color: rgba(189,189,189,1.0); */
     display: flex;
@@ -14,7 +14,7 @@
     margin-right: 0;
     margin-left: 0;
     margin-top: 1px;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
     position: relative;
     border-top: 2px solid var(--task-bar-white);
     border-bottom: 0;
@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: between;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -35,19 +35,46 @@
     align-items: center;
 }
 
+#right-side-task-menu {
+    margin-right: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#clock-container {
+    min-width: 53px;
+    overflow: hidden;
+    position: relative;
+    margin-left: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 24px;
+    display: flex;
+    /* flex: 0 0 auto; */
+    flex-direction: row;
+    align-items: center;    
+    border-top: 1px solid rgba(51, 51, 51, 0.384);
+    border-left: 1px solid rgba(51, 51, 51, 0.384);
+    box-shadow: inset 1px 1px 0px 0px rgba(51, 51, 51, 0.301);
+    border-right: 2px solid var(--task-bar-white);
+    border-bottom: 2px solid var(--task-bar-white);
+}
+
+#time {
+    margin: 0;
+    font-size: 14px;
+}
+
 #start-container {
     width: fit-content;
     height: fit-content;
-    margin-left: 3px;
-    border-top: 1px solid rgba(255, 255, 255, 0.959);
-    border-left: 1px solid rgba(255, 255, 255, 0.959);
-    border-bottom: 2px solid rgba(14, 13, 13, 0.781);
-    border-right: 2px solid rgba(14, 13, 13, 0.781);
+    margin-left: 4px;
 }
 
 #start {
-    width: 80px;
-    height: 30px;
+    width: 62px;
+    height: 21px;
     padding-left: 2px;
     padding-right: 0px;
     padding-bottom: 0px;
@@ -56,11 +83,6 @@
     align-items: center;
     display: flex;
     flex-direction: row;
-
-    border-top: 1px solid rgba(222,222,222,1.0);
-    border-left: 1px solid rgba(222,222,222,1.0);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.226);
-    border-right: 2px solid rgba(0, 0, 0, 0.226);
 
     font-family: MS-Sans-Serif-Bold;
     font-size: 17px;
@@ -71,27 +93,28 @@
 }
 
 #start-text {
+    font-size: 13px;
     width: auto;
 }
 
 #windows-icon {
     height: auto;
-    width: 33px;
+    width: 23px;
     margin-right: 4px;
     user-select: none;
 }
 
 .vertical-line-skinny {
     width: 0px;
-    height: 36px;
+    height: 27px;
     border-left: 2px solid rgba(37, 37, 37, 0.226);
     border-right: 2px solid var(--task-bar-white);
 }
 
 .vertical-line-fat {
     position: relative;
-    width: 1px;
-    height: 25px;
+    width: 0px;
+    height: 18px;
     background-color: rgba(207, 206, 206, 0.904);
     border-left: 2px solid rgba(241, 241, 241, 0.849);
     border-top: 2px solid rgba(241, 241, 241, 0.849);
@@ -103,29 +126,34 @@
 }
 
 #before-fat {
-    margin-left: 3px;
+    position: relative;
+    top: -1px;
+    margin-left: 2px;
 }
 
 #after-skinny {
-    margin-left: 15px;
+    margin-left: 13px;
 }
 
 #after-fat {
-    margin-left: 3px;
+    position: relative;
+    top: -1px;
+    margin-left: 2px;
+    margin-right: 8px;
 }
 
 #linkedin {
     position: relative;
     top: 3px;
-    height: 30px;
-    width: 30px;
+    height: 23px;
+    width: 23px;
     margin-left: 15px;
 }
 
 #github {
     position: relative;
     top: 2px;
-    height: 30px;
-    width: 30px;
+    height: 24px;
+    width: 24px;
     margin-left: 12px;
 }

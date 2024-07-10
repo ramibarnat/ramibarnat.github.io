@@ -1,13 +1,17 @@
 import './App.css'
 import Desktop from './components/Desktop'
-import Bar from './components/Bar'
+import Bar from './components/Task Bar/Bar'
+import { TabContextProvider } from './components/Task Bar/TabContext'
 
 function App() {
 
   return (
     <>
-      <Desktop/>
-      <Bar/>
+      <div className='grain-bg'/>
+      <TabContextProvider>
+        <Desktop/>
+        <Bar/>
+      </TabContextProvider>
     </>
   )
 }

@@ -6,28 +6,28 @@
     text-align: center;
     align-items: center;
     width: 66px;
-    /* border: 2px solid green; */
+    cursor: pointer;
 }
 
-#folder-container:active {
+/* #folder-container:active {
     cursor: grabbing;
-}
+} */
 
 #folder-image {
-    width: 56px;
+    width: 48px;
     height: auto;
     user-select: none;
 }
 
 #folder-name-text {
-    /* background-color: rgba(4, 2, 146, 0.979); */
+    font-size: 15px;
     max-width: 66px;
     width: fit-content;
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 1px;
     padding-left: 1px; 
-    margin-top: 9px;
+    margin-top: 8px;
     margin-bottom: 0;
     line-height: 19px;
     font-family: "MS-Sans-Serif";

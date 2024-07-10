@@ -12,8 +12,8 @@
     width: 100%;
     position: relative;
     box-sizing: border-box;
-    border-top: 1px solid rgba(139,139,139,255);
-    border-left: 1px solid rgba(139,139,139,255);
+    border-top: 1px solid rgba(139,139,139,1.0);
+    border-left: 1px solid rgba(139,139,139,1.0);
     border-right: 1px solid rgba(246,246,246,255);
     border-bottom: 1px solid rgba(246,246,246,255);
     font-family: 'MS-Sans-Serif-Bold';
@@ -25,13 +25,14 @@
     width: 100%;
     display: flex;
     box-sizing: border-box;
-    border-top: 1px solid rgba(30,30,30,255);
-    border-left: 1px solid rgba(30,30,30,255);
+    border-top: 1px solid rgb(75, 75, 75);
+    border-left: 1px solid rgba(75, 75, 75, 0.904);
     border-right: 1px solid rgba(166,166,166,255);
     border-bottom: 1px solid rgba(166,166,166,255);
     background-color: rgba(255, 255, 255, 0.897);
     scrollbar-width: none;
-    overflow-y: scroll;
+    overflow-y: auto;
+    touch-action: pan-y;
 }
 
 #text-container {
@@ -45,6 +46,7 @@
 
 .project-title {
     margin-left: 9px;
+    margin-bottom: 12px;
     margin-top: 0;
     font-size: 1.5rem;
 }
@@ -57,10 +59,63 @@
 }
 
 .text-editor-image {
-    border: 2px solid rgb(199, 101, 4);
-    border-radius: 10px;
     margin-left: 9px;
-    width: 500px;
+    width: 80%;
     height: auto;
-    max-width: 100%;
 }
+
+#batle_image {
+    border: 2px solid rgb(116, 60, 4);
+}
+
+.text-editor-video {
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    margin-left: 9px;
+    width: 80%;
+    height: auto;
+}
+
+#sleep-prevent-vid {
+    border: 2px solid rgb(7, 62, 75);
+}
+
+.text-editor-hr {
+    margin: 0;
+    margin-bottom: 6px;
+    width: calc(100% - 1px);
+    height: 1px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+#pokedex {
+    border: 2px solid rgb(66, 7, 7);
+    margin-left: 9px;
+    margin-bottom: 20px;
+    width: 92%;
+    /* height: 300px; */
+}
+
+#ps-dashboard {
+    display: none;
+}
+
+#pokedex-image {
+    display: none;
+    border: 2px solid rgb(66, 7, 7);
+}
+
+@media (max-width: 480px) {
+    #ps-dashboard {
+        display: block;
+        color: red;
+    }
+    #pokedex {
+        display: none;
+    }
+    #pokedex-image {
+        display: block;
+    }
+}
+
