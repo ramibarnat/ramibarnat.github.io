@@ -3,6 +3,7 @@ import Tab from './Tab'
 import windowsIcon from '../../assets/windows_icon.png'
 import linkedin from '../../assets/linkedin.png'
 import github from '../../assets/github.gif'
+import { links } from '../../constants/links'
 import { useState, useEffect, useRef, useContext } from 'react'
 import { TabContext } from './TabContext';
 
@@ -92,10 +93,10 @@ function Bar() {
                     </div>
                     <div id='before-skinny' className='vertical-line-skinny' />
                     <div id='before-fat' className='vertical-line-fat' />
-                    <a href="https://www.linkedin.com/in/rami-souguir-9732761aa/" target="_blank">
+                    <a href={links.linkedin_url} target="_blank">
                         <img id="linkedin" src={linkedin}/>
                     </a>
-                    <a href="https://github.com/RamiSouguir" target="_blank">
+                    <a href={links.github_url} target="_blank">
                         <img id="github" src={github}/>
                     </a>
                     <div id='after-skinny' className='vertical-line-skinny' />
