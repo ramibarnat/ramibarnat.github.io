@@ -45,7 +45,7 @@ function TextEditor() {
             </p>
             <img id='batle_image' className="text-editor-image" src={batle}></img>
             <p className="project-body">
-              The website current has one multiplayer minigame which utilizes 3D 
+              The website currently has one multiplayer minigame which utilizes 3D 
               rendering libraries and geojson data to allow users to guess the 
               country on the globe.
             </p>
