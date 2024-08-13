@@ -101,9 +101,11 @@ function Bar() {
                     </a>
                     <div id='after-skinny' className='vertical-line-skinny' />
                     <div id='after-fat' className='vertical-line-fat' />
-                    {tabs.map((tab: any) => (
-                        <Tab name={tab.name} />
+                    
+                    {Object.entries(tabs).map(([id, tab]) => (
+                        <Tab key={id} name={tab.name} />
                     ))}
+                    
                 </div>
                 <div id='right-side-task-menu'>
                     <div className='vertical-line-skinny'/>

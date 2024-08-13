@@ -1,24 +1,22 @@
-import { useState, useRef, useEffect, useContext } from "react";
-import "./App.css";
+import { useState, useRef, useEffect } from "react";
+import "./BaseAppIcon.css";
 import Draggable from "react-draggable";
-import { TabContext } from "../Task Bar/TabContext";
 
 interface AppProps {
-  type: 'folder' | 'projects' | 'text',
+  openApp: (id: string) => void,
   name?: string,
   init_x?: number,
   init_y?: number,
   app_img: any,
 }
 
-function App({
-  type,
+function BaseAppIcon({
+  openApp,
   name = "New App",
   init_x = 0,
   init_y = 0,
   app_img,
 }: AppProps) {
-  const { setTabs } = useContext(TabContext);
   const [clicks, setClicks] = useState(0);
   const [timeoutId, setTimeoutId] = useState<any>(-1);
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -39,14 +37,10 @@ function App({
     }, 700)
     setTimeoutId(newTimeout);
 
-    if (clicks >= 1) {
+    if (clicks >= 1) { // Double Click, Trigger application opening
       setClicks(0);
-      setTabs((prev) => {
-        if (!prev.find(object => object.id === id)) {
-          return [...prev, {name: name, id: id, type: type}];
-        } 
-        return prev;
-      })
+      console.log(id)
+      openApp(id)
     }
   };
 
@@ -107,4 +101,4 @@ function App({
   );
 }
 
-export default App;
+export default BaseAppIcon;

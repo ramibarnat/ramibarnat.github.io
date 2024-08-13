@@ -8,14 +8,19 @@ interface WindowComponentProps {
     children?: ReactNode;
     init_x?: number;
     init_y?: number;
-    init_width?: number;
-    init_height?: number;
     id: string;
-    close_window: any;
 }
 
-function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_height=400, close_window, id}: WindowComponentProps) {
-    const { setTabs } = useContext(TabContext);
+function WindowComponent({children, init_x=0, init_y=0, id}: WindowComponentProps) {
+    const init_height = .7 * window.innerHeight;
+    let init_width: number;
+    if (window.innerWidth < 1000) {
+        init_width = .75 * window.innerWidth;
+    } else {
+        init_width = .45 * window.innerWidth;
+    }
+
+    const { tabs, removeTab } = useContext(TabContext);
     const [position, setPosition] = useState({x: init_x, y: init_y});
     const [mouseDownClose, setMouseDownClose] = useState("default");
     // const [isScrolling, setIsScrolling] = useState(false);
@@ -38,6 +43,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
     }
 
     const handleMouseDown = (event: any) => {
+        // Prevents default behavior when user clicks
         event.preventDefault();
     }
 
@@ -46,9 +52,11 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
             setMouseDownClose("default");
         } else {
             setMouseDownClose((prev) => {
-                if (prev === "clicked") {
-                    close_window(id); // callback function to the Desktop component
-                    setTabs((prev) => prev.filter((val) => val.id !== id))
+                if (prev === "clicked") { 
+                    // This means the user clicked on the close button and didn't drag mouse away after
+                    console.log(tabs);
+                    removeTab(id);
+                    console.log(tabs);
                 }
                 return prev;
             })
@@ -60,7 +68,6 @@ function WindowComponent({children, init_x=0, init_y=0, init_width=500, init_hei
             event.preventDefault();
             return false;
         }
-
     }
 
     useEffect(() => {
