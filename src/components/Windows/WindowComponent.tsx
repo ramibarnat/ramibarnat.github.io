@@ -8,18 +8,23 @@ interface WindowComponentProps {
     children?: ReactNode;
     init_x?: number;
     init_y?: number;
+    init_width?: number,
+    init_height?: number,
     id: string;
 }
 
-function WindowComponent({children, init_x=0, init_y=0, id}: WindowComponentProps) {
-    const init_height = .7 * window.innerHeight;
-    let init_width: number;
-    if (window.innerWidth < 1000) {
-        init_width = .75 * window.innerWidth;
-    } else {
-        init_width = .45 * window.innerWidth;
+function WindowComponent({children, init_x=0, init_y=0, init_width, init_height, id}: WindowComponentProps) {
+    if (init_height === undefined) {
+        init_height = .7 * window.innerHeight;
     }
-
+    if (init_width === undefined) {
+        if (window.innerWidth < 1000) {
+            init_width = .75 * window.innerWidth;
+        } else {
+            init_width = .45 * window.innerWidth;
+        }
+    }
+    
     const { tabs, removeTab } = useContext(TabContext);
     const [position, setPosition] = useState({x: init_x, y: init_y});
     const [mouseDownClose, setMouseDownClose] = useState("default");
@@ -64,6 +69,7 @@ function WindowComponent({children, init_x=0, init_y=0, id}: WindowComponentProp
     }
 
     const handleDragStart = (event: any) => {
+        // Ensures that dragging only works when holding on to top bar
         if (event.target !== dragHandleRef.current) {
             event.preventDefault();
             return false;
@@ -76,9 +82,9 @@ function WindowComponent({children, init_x=0, init_y=0, id}: WindowComponentProp
     }, []);
 
     return (
-        <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
-        onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart}>
-            <div style={{ width: init_width, height: init_height}} className='default-outer-container' id='outer-window-container'>
+        <Draggable position={{x:position.x, y:position.y}} bounds={"parent"}
+        onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart} key={id}>
+            <div style={{ width: init_width, height: init_height}} className='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
                     <div ref={dragHandleRef} id='window-top-bar'>
                         <div id='action-buttons'>

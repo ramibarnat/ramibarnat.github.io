@@ -17,8 +17,8 @@ function BaseAppIcon({
   init_y = 0,
   app_img,
 }: AppProps) {
-  const [clicks, setClicks] = useState(0);
-  const [timeoutId, setTimeoutId] = useState<any>(-1);
+  const [clicks, setClicks] = useState(0); // Checks for double click
+  const [timeoutId, setTimeoutId] = useState<any>(-1); // Time in between each click
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [position, setPosition] = useState({ x: init_x, y: init_y });
   const [id, setId] = useState("");
@@ -37,7 +37,7 @@ function BaseAppIcon({
     }, 700)
     setTimeoutId(newTimeout);
 
-    if (clicks >= 1) { // Double Click, Trigger application opening
+    if (clicks >= 1) { // Double Click, trigger application opening
       setClicks(0);
       console.log(id)
       openApp(id)
@@ -85,16 +85,16 @@ function BaseAppIcon({
         ref={componentRef}
         onTouchStart={handleClick}
         onClick={handleClick}
-        id="folder-container">
-        <img id="folder-image" src={app_img} />
+        className="app-container">
+        <img className="app-image" src={app_img} />
         <p
           style={{
             backgroundColor: isHighlighted ? "rgba(4, 2, 146, 0.979)" : "transparent",
             color: isHighlighted ? "rgba(255, 255, 255, 0.95)" : "black",
             borderColor: isHighlighted ? "rgba(255, 255, 255, 0.85)" : "transparent",
           }}
-          id="folder-name-text">
-          {name}
+          className="app-name-text">
+           {name}
         </p>
       </div>
     </Draggable>

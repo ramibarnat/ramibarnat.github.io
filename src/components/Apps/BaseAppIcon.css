@@ -1,4 +1,4 @@
-#folder-container {
+.app-container {
     position: absolute;
     display: flex;
     overflow-wrap: break-word;
@@ -13,13 +13,13 @@
     cursor: grabbing;
 } */
 
-#folder-image {
+.app-image {
     width: 48px;
     height: auto;
     user-select: none;
 }
 
-#folder-name-text {
+.app-name-text {
     font-size: 15px;
     max-width: 66px;
     width: fit-content;

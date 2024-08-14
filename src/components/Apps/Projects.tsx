@@ -30,7 +30,7 @@ function Projects(id: string) {
   }, [pokedexRef]);
 
   return (
-    <WindowComponent id={id}>
+    <WindowComponent id={id} init_x={Math.floor(Math.random() * 50)} init_y={Math.floor(Math.random() * 50)}>
       <div id="text-editor-container">
         <div id="text-body-container">
           <div onTouchStartCapture={stopDrag} id="text-editor-inner" ref={scrollableContentRef}>
@@ -60,7 +60,7 @@ function Projects(id: string) {
                 multiple invention competitions and worked with a startup accelerator
                 to further develop the product.
               </p>
-              <video id='sleep-prevent-vid' className="text-editor-video" autoPlay loop muted>
+              <video id='sleep-prevent-vid' className="text-editor-video" autoPlay loop muted webkit-playsinline>
                 <source src={sleep_prevent} type="video/mp4" />
               </video>
               <hr className="text-editor-hr"/>

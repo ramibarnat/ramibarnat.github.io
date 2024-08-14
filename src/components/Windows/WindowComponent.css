@@ -1,6 +1,13 @@
+.outer-window-container {
+    position: absolute;
+    border-top: 1px solid rgba(222,222,222,1.0);
+    border-left: 1px solid rgba(222,222,222,1.0);
+    border-right: 1px solid rgba(0, 0, 0, 0.897);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.897);
+    background-color: rgba(194,197,202,1.0);
+}
 
 #window-container {
-    /* border: 2px solid green; */
     min-width: 140px;
     min-height: 120px;
     box-sizing: border-box;
