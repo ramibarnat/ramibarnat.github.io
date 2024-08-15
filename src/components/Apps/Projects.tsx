@@ -60,7 +60,7 @@ function Projects(id: string) {
                 multiple invention competitions and worked with a startup accelerator
                 to further develop the product.
               </p>
-              <video id='sleep-prevent-vid' className="text-editor-video" autoPlay loop muted webkit-playsinline>
+              <video id='sleep-prevent-vid' className="text-editor-video" autoPlay loop muted playsInline={true}>
                 <source src={sleep_prevent} type="video/mp4" />
               </video>
               <hr className="text-editor-hr"/>

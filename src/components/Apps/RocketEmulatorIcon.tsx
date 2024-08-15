@@ -2,21 +2,21 @@ import BaseAppIcon from "./BaseAppIcon"
 import rocket from '../../assets/spaceship_icon.png'
 import { useContext } from "react";
 import { TabContext } from "../Task Bar/TabContext";
-import Projects from './Projects'
+import RocketEmulator from "./RocketEmulator";
 
-interface ProjectsAppIconProps {
+interface RocketEmulatorIconProps {
     init_x?: number,
     init_y?: number,
 }
-function ProjectsAppIcon({init_x, init_y}: ProjectsAppIconProps){
+function ProjectsAppIcon({init_x, init_y}: RocketEmulatorIconProps){
     const { addTab } = useContext(TabContext);
     
     const openApp = (id: string) => {
-        addTab("Rocket Emulator", id, Projects)
+        addTab("Rocket Simulator", id, RocketEmulator)
     }
 
     return (
-        <BaseAppIcon openApp={openApp} name={"Rocket Emulator"} init_x={init_x} init_y={init_y} app_img={rocket}/>
+        <BaseAppIcon openApp={openApp} name={"Rocket Simulator"} init_x={init_x} init_y={init_y} app_img={rocket}/>
     )
 }
 

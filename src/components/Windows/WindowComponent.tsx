@@ -82,7 +82,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width, init_height,
     }, []);
 
     return (
-        <Draggable position={{x:position.x, y:position.y}} bounds={"parent"}
+        <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
         onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart} key={id}>
             <div style={{ width: init_width, height: init_height}} className='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
