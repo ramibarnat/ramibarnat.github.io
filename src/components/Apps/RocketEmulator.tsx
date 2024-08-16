@@ -40,6 +40,7 @@ function Cube() {
 
 function RocketEmulator(id: string) {
   const radius = 60
+  let spaceshipPos = 
   const models = {
     spaceship: "./scene.gltf",
     planet_surface: planet_surface
