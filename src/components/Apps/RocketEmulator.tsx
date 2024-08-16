@@ -1,13 +1,32 @@
 import "./RocketEmulator.css";
 import WindowComponent from "../Windows/WindowComponent";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
+import * as THREE from 'three'
+import planet_surface from '../../assets/3d/planet_surface.png'
 
+interface ModelConfig {
+  url: string, 
+  x_pos?: number, 
+  y_pos?: number, 
+  z_pos?: number
+}
 
-function Model(url: {url: string}) {
-  console.log(typeof url.url, url.url)
-  const { scene } = useGLTF(url.url) as any;
-  return <primitive object={scene} scale={0.5} />;
+function Model({url, x_pos=0, y_pos=0, z_pos=0}: ModelConfig) {
+  const { scene } = useGLTF(url) as any;
+  return <primitive object={scene} scale={0.5} position={[x_pos, y_pos, z_pos]}/>;
+}
+
+function TexturedSphere( {texturePath, radius}: {texturePath: string, radius: number}) {
+  // Load the texture
+  const texture = useLoader(THREE.TextureLoader, texturePath);
+
+  return (
+    <mesh>
+      <sphereGeometry args={[radius, 64, 64]} />
+      <meshStandardMaterial map={texture} />
+    </mesh>
+  );
 }
 
 function Cube() {
@@ -20,9 +39,10 @@ function Cube() {
 }
 
 function RocketEmulator(id: string) {
-  // const { rocket } = useGLTF("../../assets/3d/scene.gltf");
+  const radius = 60
   const models = {
-    spaceship: "./scene.gltf"
+    spaceship: "./scene.gltf",
+    planet_surface: planet_surface
   }
 
   return (
@@ -33,10 +53,11 @@ function RocketEmulator(id: string) {
           onCreated={({ gl }) => {
             gl.setClearColor("#9ff0fc"); // Background color for the scene
           }}>
-          <ambientLight intensity={2} color={"red"}/>
+          <ambientLight intensity={2}/>
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
-          <Model url={models.spaceship}/>
+          <Model url={models.spaceship} x_pos={0} y_pos={radius}/>
+          <TexturedSphere texturePath={models.planet_surface} radius={radius}/>
           <OrbitControls />
         </Canvas>
       </div>
