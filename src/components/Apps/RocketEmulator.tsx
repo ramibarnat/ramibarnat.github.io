@@ -1,51 +1,117 @@
+import { forwardRef, useEffect } from "react";
 import "./RocketEmulator.css";
 import WindowComponent from "../Windows/WindowComponent";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import * as THREE from 'three'
 import planet_surface from '../../assets/3d/planet_surface.png'
+import { useRef } from "react";
 
 interface ModelConfig {
   url: string, 
   x_pos?: number, 
   y_pos?: number, 
-  z_pos?: number
+  z_pos?: number,
+  rotation?: [number,number,number],
+  scale?: number,
 }
 
-function Model({url, x_pos=0, y_pos=0, z_pos=0}: ModelConfig) {
+const Model = forwardRef<THREE.Group, ModelConfig>(({ url, x_pos = 0, y_pos = 0, z_pos = 0, rotation = [0,0,0], scale=1}, ref) => {
   const { scene } = useGLTF(url) as any;
-  return <primitive object={scene} scale={0.5} position={[x_pos, y_pos, z_pos]}/>;
-}
+  
+  return (
+    <primitive 
+      object={scene} 
+      scale={scale} 
+      position={[x_pos, y_pos, z_pos]} 
+      rotation={new THREE.Euler(...rotation)}
+      ref={ref} 
+    />
+  );
+});
 
-function TexturedSphere( {texturePath, radius}: {texturePath: string, radius: number}) {
+
+function TexturedSphere( {texturePath, radius, rotation=[0,0,0]}: {texturePath: string, radius: number, rotation?: [number,number,number]}) {
   // Load the texture
   const texture = useLoader(THREE.TextureLoader, texturePath);
 
   return (
-    <mesh>
+    <mesh rotation={rotation}>
       <sphereGeometry args={[radius, 64, 64]} />
       <meshStandardMaterial map={texture} />
     </mesh>
   );
 }
 
-function Cube() {
-  return (
-    <mesh rotation={[0, 0, 0]}>
-      <boxGeometry />
-      <meshBasicMaterial color="green" />
-    </mesh>
-  );
-}
 
-function RocketEmulator(id: string) {
-  const radius = 60
-  let spaceshipPos = 
+const RocketEmulatorComponent = () => {
+  // *IMPORTANT*
+  // We're required to create this seperate component
+  // in order to use the useFrame hook since it has
+  // to be within the Canvas component
+
+  const radius = 1000;
+  const spaceshipRef = useRef<any>();
+  const controllerRef = useRef<any>();
+  const cameraRef = useRef<any>();
+
   const models = {
     spaceship: "./scene.gltf",
     planet_surface: planet_surface
   }
 
+  useFrame(() => {
+    if (spaceshipRef.current && controllerRef.current) {
+      controllerRef.current.target.copy(spaceshipRef.current.position)
+    }
+  });
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.code === "Space" && spaceshipRef.current && cameraRef.current) {
+        spaceshipRef.current.position.y += .01;
+        cameraRef.current.position.y += .01;
+      } 
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  },[])
+
+  return (
+    <>
+      <ambientLight intensity={2}/>
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      <pointLight position={[-10, -10, -10]} />
+      
+      <Model 
+        url={models.spaceship} 
+        y_pos={radius+0.23} 
+        scale={0.1} 
+        rotation={[-Math.PI/2,0,-Math.PI/2]} 
+        ref={spaceshipRef}/>
+      <TexturedSphere 
+        texturePath={models.planet_surface} 
+        radius={radius} 
+        rotation={[Math.PI/2,0,0]}/>
+      <PerspectiveCamera makeDefault 
+        position={[5, radius+1, 0]} 
+        fov={75} 
+        zoom={3} 
+        ref={cameraRef}/>
+      <OrbitControls 
+        enablePan={false} 
+        ref={controllerRef}
+        zoomSpeed={0.25}
+        rotateSpeed={0.25}/>
+    </>
+  )
+}
+
+
+function RocketEmulator(id: string) {
   return (
     <WindowComponent id={id} init_x={Math.floor(Math.random() * 50)} init_y={Math.floor(Math.random() * 50)}>
       <div id="rocket-emulator-container">
@@ -54,12 +120,7 @@ function RocketEmulator(id: string) {
           onCreated={({ gl }) => {
             gl.setClearColor("#9ff0fc"); // Background color for the scene
           }}>
-          <ambientLight intensity={2}/>
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-          <pointLight position={[-10, -10, -10]} />
-          <Model url={models.spaceship} x_pos={0} y_pos={radius}/>
-          <TexturedSphere texturePath={models.planet_surface} radius={radius}/>
-          <OrbitControls />
+          <RocketEmulatorComponent/>
         </Canvas>
       </div>
     </WindowComponent>

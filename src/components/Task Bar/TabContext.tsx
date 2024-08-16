@@ -48,14 +48,12 @@ const TabContextProvider: FC<ProviderProps> = ({children}) => {
     const removeTab = (id: any) => {
         setTabs(prevTabs => {
             if (!prevTabs[id.id]){
-                console.log(`Window does not exist with id: ${id.id}`)
+                // console.log(`Window does not exist with id: ${id.id}`)
                 return prevTabs;
             }
-            console.log(`Window removed with id: ${id.id}`)
-            // console.log(Object.entries(tabs))
+            // console.log(`Window removed with id: ${id.id}`)
             const newTabs = {...prevTabs}
             delete newTabs[id.id]
-            // console.log(Object.entries(tabs))
             return newTabs
         })
     }

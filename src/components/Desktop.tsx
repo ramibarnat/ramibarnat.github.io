@@ -3,7 +3,6 @@ import ProjectsAppIcon from './Apps/ProjectsAppIcon';
 import './Desktop.css'
 import { TabContext } from './Task Bar/TabContext';
 import RocketEmulatorIcon from './Apps/RocketEmulatorIcon';
-import WindowComponent from './Windows/WindowComponent';
 
 function Desktop() {
     const { tabs } = useContext(TabContext);
@@ -14,6 +13,7 @@ function Desktop() {
         });
     const [nextId, setNextId] = useState(2)
 
+    // @ts-ignore
     const createNewApp = (component: React.ComponentType<any>, props?: any) => {
         setDesktopApps(prev => {
             return {...prev, [nextId]:{component:component, props: props}}

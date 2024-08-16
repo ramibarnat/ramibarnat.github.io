@@ -25,7 +25,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width, init_height,
         }
     }
     
-    const { tabs, removeTab } = useContext(TabContext);
+    const { removeTab } = useContext(TabContext);
     const [position, setPosition] = useState({x: init_x, y: init_y});
     const [mouseDownClose, setMouseDownClose] = useState("default");
     // const [isScrolling, setIsScrolling] = useState(false);
@@ -59,9 +59,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width, init_height,
             setMouseDownClose((prev) => {
                 if (prev === "clicked") { 
                     // This means the user clicked on the close button and didn't drag mouse away after
-                    console.log(tabs);
                     removeTab(id);
-                    console.log(tabs);
                 }
                 return prev;
             })
