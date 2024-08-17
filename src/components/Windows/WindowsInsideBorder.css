@@ -1,0 +1,32 @@
+.window-inside-border {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 2px;
+    display: flex;
+    overflow: hidden;
+}
+
+.window-inner-inside-border {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(139,139,139,1.0);
+    border-left: 1px solid rgba(139,139,139,1.0);
+    border-right: 1px solid rgba(246,246,246,255);
+    border-bottom: 1px solid rgba(246,246,246,255);
+    display: flex;
+}
+
+.window-inside-border-body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(75, 75, 75);
+    border-left: 1px solid rgba(75, 75, 75, 0.904);
+    border-right: 1px solid rgba(166,166,166,255);
+    border-bottom: 1px solid rgba(166,166,166,255);
+    background-color: rgba(255, 255, 255, 0.897);
+}

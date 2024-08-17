@@ -3,13 +3,15 @@ import ProjectsAppIcon from './Apps/ProjectsAppIcon';
 import './Desktop.css'
 import { TabContext } from './Task Bar/TabContext';
 import RocketEmulatorIcon from './Apps/RocketEmulatorIcon';
+import SonicAppIcon from './Apps/SonicAppIcon';
 
 function Desktop() {
     const { tabs } = useContext(TabContext);
     const [desktopApps, setDesktopApps] = 
         useState({
-            1: {component: ProjectsAppIcon, props: {init_x: 50, init_y: 50}},
-            2: {component: RocketEmulatorIcon, props: {init_x: 50, init_y: 160}}
+            1: {component: ProjectsAppIcon, props: {init_x: 40, init_y: 40}},
+            2: {component: RocketEmulatorIcon, props: {init_x: 40, init_y: 140}},
+            3: {component: SonicAppIcon, props: {init_x: 40, init_y: 260}},
         });
     const [nextId, setNextId] = useState(2)
 
@@ -24,7 +26,6 @@ function Desktop() {
         <div id="desktop-container">
             {Object.entries(desktopApps).map(([id, app]) => (
                 <app.component key={id} {...app.props} />
-                
             ))}
             {Object.entries(tabs).map(([id, tab]) => (
                 <tab.component key={id} id={id} {...tab.props} />

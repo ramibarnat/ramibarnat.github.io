@@ -39,7 +39,6 @@ function BaseAppIcon({
 
     if (clicks >= 1) { // Double Click, trigger application opening
       setClicks(0);
-      console.log(id)
       openApp(id)
     }
   };

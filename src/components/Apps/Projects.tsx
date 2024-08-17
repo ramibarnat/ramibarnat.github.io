@@ -6,7 +6,7 @@ import pokedex from "../../assets/pokedex_img.png"
 import { useEffect, useRef, useState } from "react";
 import WindowComponent from "../Windows/WindowComponent";
 
-function Projects(id: string) {
+function Projects({id}: {id:string}) {
   const scrollableContentRef = useRef(null);
   const pokedexRef = useRef(null);
   const [pokedexHeight, setPokedexHeight] = useState(10);

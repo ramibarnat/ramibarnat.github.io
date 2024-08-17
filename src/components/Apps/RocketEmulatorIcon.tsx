@@ -1,5 +1,5 @@
 import BaseAppIcon from "./BaseAppIcon"
-import rocket from '../../assets/spaceship_icon.png'
+import rocket from '../../assets/App_Icons/spaceship_icon.png'
 import { useContext } from "react";
 import { TabContext } from "../Task Bar/TabContext";
 import RocketEmulator from "./RocketEmulator";

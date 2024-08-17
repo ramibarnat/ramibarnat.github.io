@@ -1,5 +1,5 @@
 import BaseAppIcon from "./BaseAppIcon"
-import filled_folder from '../../assets/filled_folder.png'
+import filled_folder from '../../assets/App_Icons/filled_folder.png'
 import { useContext } from "react";
 import { TabContext } from "../Task Bar/TabContext";
 import Projects from './Projects'

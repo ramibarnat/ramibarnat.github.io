@@ -1,6 +1,6 @@
 import { forwardRef, useEffect } from "react";
 import "./RocketEmulator.css";
-import WindowComponent from "../Windows/WindowComponent";
+import WindowInsideBorder from "../Windows/WindowInsideBorder";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import * as THREE from 'three'
@@ -37,7 +37,7 @@ function TexturedSphere( {texturePath, radius, rotation=[0,0,0]}: {texturePath: 
 
   return (
     <mesh rotation={rotation}>
-      <sphereGeometry args={[radius, 64, 64]} />
+      <sphereGeometry args={[radius, 100, 100]} />
       <meshStandardMaterial map={texture} />
     </mesh>
   );
@@ -111,9 +111,9 @@ const RocketEmulatorComponent = () => {
 }
 
 
-function RocketEmulator(id: string) {
+function RocketEmulator({id}: {id:string}) {
   return (
-    <WindowComponent id={id} init_x={Math.floor(Math.random() * 50)} init_y={Math.floor(Math.random() * 50)}>
+    <WindowInsideBorder id={id}>
       <div id="rocket-emulator-container">
         <Canvas gl={{ antialias: true }}
           style={{ background: "#9ff0fc" }} // CSS background style
@@ -123,7 +123,7 @@ function RocketEmulator(id: string) {
           <RocketEmulatorComponent/>
         </Canvas>
       </div>
-    </WindowComponent>
+    </WindowInsideBorder>
   );
 }
 

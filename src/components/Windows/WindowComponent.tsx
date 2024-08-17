@@ -13,20 +13,20 @@ interface WindowComponentProps {
     id: string;
 }
 
-function WindowComponent({children, init_x=0, init_y=0, init_width, init_height, id}: WindowComponentProps) {
-    if (init_height === undefined) {
-        init_height = .7 * window.innerHeight;
-    }
-    if (init_width === undefined) {
-        if (window.innerWidth < 1000) {
-            init_width = .75 * window.innerWidth;
-        } else {
-            init_width = .45 * window.innerWidth;
-        }
-    }
+function WindowComponent({children, init_x, init_y, init_width, init_height, id}: WindowComponentProps) {
     
+    // This ensures that the width and height do not update more than once
+    const [initialDimensions] = useState({
+        width: init_width !== undefined ? init_width : 
+            (window.innerWidth < 1000 ? 0.75 * window.innerWidth : 0.45 * window.innerWidth),
+        height: init_height !== undefined ? init_height : 0.7 * window.innerHeight
+    });
     const { removeTab } = useContext(TabContext);
-    const [position, setPosition] = useState({x: init_x, y: init_y});
+    const [position, setPosition] = useState(
+        {
+            x: init_x !== undefined ? init_x : Math.floor(Math.random() * 50), 
+            y: init_y !== undefined ? init_y : Math.floor(Math.random() * 50)
+        });
     const [mouseDownClose, setMouseDownClose] = useState("default");
     // const [isScrolling, setIsScrolling] = useState(false);
     
@@ -75,6 +75,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width, init_height,
     }
 
     useEffect(() => {
+        
         document.addEventListener('mouseup', handleMouseUp)
         return () => document.removeEventListener('mouseup', handleMouseUp);
     }, []);
@@ -82,7 +83,7 @@ function WindowComponent({children, init_x=0, init_y=0, init_width, init_height,
     return (
         <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
         onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart} key={id}>
-            <div style={{ width: init_width, height: init_height}} className='outer-window-container'>
+            <div style={{ width: initialDimensions.width, height: initialDimensions.height}} className='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
                     <div ref={dragHandleRef} id='window-top-bar'>
                         <div id='action-buttons'>
