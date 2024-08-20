@@ -24,12 +24,17 @@ function Desktop() {
     }
     return (
         <div id="desktop-container">
+            {/* render all the desktop app icons */}
             {Object.entries(desktopApps).map(([id, app]) => (
                 <app.component key={id} {...app.props} />
             ))}
-            {Object.entries(tabs).map(([id, tab]) => (
-                <tab.component key={id} id={id} {...tab.props} />
-            ))}
+
+            {/* render all the desktop windows */}
+            {Object.entries(tabs).map(([id,tab]) => {
+                return (
+                    <tab.component key={id} id={id} {...tab.props}/>
+                )
+            })}
         </div>
     )
 }

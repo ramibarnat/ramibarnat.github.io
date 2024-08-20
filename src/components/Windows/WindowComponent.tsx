@@ -10,10 +10,11 @@ interface WindowComponentProps {
     init_y?: number;
     init_width?: number,
     init_height?: number,
-    id: string;
+    id: string,
 }
 
 function WindowComponent({children, init_x, init_y, init_width, init_height, id}: WindowComponentProps) {
+    const { tabs, removeTab } = useContext(TabContext);
     
     // This ensures that the width and height do not update more than once
     const [initialDimensions] = useState({
@@ -21,7 +22,7 @@ function WindowComponent({children, init_x, init_y, init_width, init_height, id}
             (window.innerWidth < 1000 ? 0.75 * window.innerWidth : 0.45 * window.innerWidth),
         height: init_height !== undefined ? init_height : 0.7 * window.innerHeight
     });
-    const { removeTab } = useContext(TabContext);
+    
     const [position, setPosition] = useState(
         {
             x: init_x !== undefined ? init_x : Math.floor(Math.random() * 50), 
@@ -83,7 +84,8 @@ function WindowComponent({children, init_x, init_y, init_width, init_height, id}
     return (
         <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
         onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart} key={id}>
-            <div style={{ width: initialDimensions.width, height: initialDimensions.height}} className='outer-window-container'>
+            {/* In this first div, we set the z-index of the window based on the focused property of the window */}
+            <div style={{ width: initialDimensions.width, height: initialDimensions.height, zIndex: tabs[id].focused ? 1: 0}} className='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
                     <div ref={dragHandleRef} id='window-top-bar'>
                         <div id='action-buttons'>
