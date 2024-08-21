@@ -120,7 +120,7 @@ function RocketEmulator({id}: {id:string}) {
     <WindowInsideBorder id={id}>
       <div id="rocket-emulator-container">
         <Canvas gl={{ antialias: true }}
-          tabIndex={10}
+          tabIndex={1}
           style={{ background: "#9ff0fc" }} // CSS background style
           onCreated={({ gl }) => {
             gl.setClearColor("#9ff0fc"); // Background color for the scene
