@@ -12,7 +12,7 @@ function ProjectsAppIcon({init_x, init_y}: ProjectsAppIconProps){
     const { addTab } = useContext(TabContext);
     
     const openApp = (id: string) => {
-        addTab("Projects", id, Projects)
+        addTab("Projects", id, Projects, filled_folder)
     }
 
     return (

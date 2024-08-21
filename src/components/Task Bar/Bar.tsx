@@ -102,8 +102,9 @@ function Bar() {
                     <div id='after-skinny' className='vertical-line-skinny' />
                     <div id='after-fat' className='vertical-line-fat' />
                     
+                    {/* Render the tabs dynamically using the tabs list from our provider */}
                     {Object.entries(tabs).map(([id, tab]) => (
-                        <Tab key={id} name={tab.name} />
+                        <Tab key={id} name={tab.name} image={tab.image} id={id}/>
                     ))}
                     
                 </div>

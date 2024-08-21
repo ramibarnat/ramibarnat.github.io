@@ -4,6 +4,7 @@ interface TabConfig {
     name: string,
     component: React.ComponentType<any>,
     focused: boolean,
+    image: string,
     props?: any,
 }
 
@@ -12,8 +13,9 @@ interface TabContextType {
 
     // We use addTab to ensure that no duplicate tabs are created
     // React.ComponentType is used bc it's more flexible than React.Component 
-    addTab: (name: string, id: string, component: React.ComponentType<any>, props?: any) => void,
+    addTab: (name: string, id: string, component: React.ComponentType<any>, image: string, props?: any) => void,
     removeTab: (id:string) => void,
+    setFocus: (id:string) => void,
     focusedTab: string,
 }
 
@@ -21,6 +23,7 @@ const TabContext = createContext<TabContextType>({
     tabs: {},
     addTab: () => {},
     removeTab: () => {},
+    setFocus: () => {},
     focusedTab: "",
 });
 
@@ -33,16 +36,20 @@ const TabContextProvider: FC<ProviderProps> = ({children}) => {
     const [tabs, setTabs] = useState<Record<string,TabConfig>>({});
     const [focusedTab, setFocusedTab] = useState<string>("");
  
-    const addTab = (name: string, id: string, component: React.ComponentType<any>, props?: any) => {
+    const addTab = (name: string, id: string, component: React.ComponentType<any>, image: string, props?: any) => {
         setTabs(prevTabs => {
             const newTabs = {...prevTabs};
-            console.log(newTabs)
             if (newTabs[focusedTab]) {
                 newTabs[focusedTab].focused = false;
             }
             setFocusedTab(id);
-            newTabs[id] = {name: name, component: component, focused: true, props: props}
-            console.log(newTabs)
+            newTabs[id] = {
+                name: name, 
+                component: component, 
+                focused: true, 
+                image: image, 
+                props: props
+            }
             return newTabs;
         });
       };
@@ -60,8 +67,24 @@ const TabContextProvider: FC<ProviderProps> = ({children}) => {
         })
     }
 
+    const setFocus = (id: string) => {
+        setTabs(prevTabs => {
+            if (!prevTabs[id]){
+                return prevTabs;
+            }
+            const newTabs = {...prevTabs};
+
+            if (newTabs[focusedTab]) {
+                newTabs[focusedTab].focused = false;
+            }
+            newTabs[id].focused = true;
+            setFocusedTab(id)
+            return newTabs;
+        })
+    }
+
     return (
-        <TabContext.Provider value={{tabs, addTab, removeTab, focusedTab}}>
+        <TabContext.Provider value={{tabs, addTab, removeTab, focusedTab, setFocus}}>
             {children}
         </TabContext.Provider>
     )

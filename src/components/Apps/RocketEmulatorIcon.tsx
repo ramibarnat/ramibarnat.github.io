@@ -10,13 +10,14 @@ interface RocketEmulatorIconProps {
 }
 function ProjectsAppIcon({init_x, init_y}: RocketEmulatorIconProps){
     const { addTab } = useContext(TabContext);
+    const name = "Rocket Simulator (WIP)"
     
     const openApp = (id: string) => {
-        addTab("Rocket Simulator", id, RocketEmulator)
+        addTab(name, id, RocketEmulator, rocket);
     }
 
     return (
-        <BaseAppIcon openApp={openApp} name={"Rocket Simulator"} init_x={init_x} init_y={init_y} app_img={rocket}/>
+        <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={rocket}/>
     )
 }
 

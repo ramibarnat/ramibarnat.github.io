@@ -11,7 +11,7 @@ function Desktop() {
         useState({
             1: {component: ProjectsAppIcon, props: {init_x: 40, init_y: 40}},
             2: {component: RocketEmulatorIcon, props: {init_x: 40, init_y: 140}},
-            3: {component: SonicAppIcon, props: {init_x: 40, init_y: 260}},
+            3: {component: SonicAppIcon, props: {init_x: 40, init_y: 280}},
         });
     const [nextId, setNextId] = useState(2)
 

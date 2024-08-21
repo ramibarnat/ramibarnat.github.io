@@ -14,7 +14,7 @@ interface WindowComponentProps {
 }
 
 function WindowComponent({children, init_x, init_y, init_width, init_height, id}: WindowComponentProps) {
-    const { tabs, removeTab } = useContext(TabContext);
+    const { tabs, removeTab, setFocus } = useContext(TabContext);
     
     // This ensures that the width and height do not update more than once
     const [initialDimensions] = useState({
@@ -49,6 +49,7 @@ function WindowComponent({children, init_x, init_y, init_width, init_height, id}
     }
 
     const handleMouseDown = (event: any) => {
+        setFocus(id);
         // Prevents default behavior when user clicks
         event.preventDefault();
     }
