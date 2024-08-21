@@ -85,17 +85,21 @@ const RocketEmulatorComponent = () => {
       <ambientLight intensity={2}/>
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
-      
-      <Model 
+
+      {/* Spaceship model */}
+      <Model
         url={models.spaceship} 
-        y_pos={radius+0.23} 
+        y_pos={radius+0.08} 
         scale={0.1} 
         rotation={[-Math.PI/2,0,-Math.PI/2]} 
         ref={spaceshipRef}/>
+
+      {/* Planet model */}
       <TexturedSphere 
         texturePath={models.planet_surface} 
         radius={radius} 
         rotation={[Math.PI/2,0,0]}/>
+
       <PerspectiveCamera makeDefault 
         position={[5, radius+1, 0]} 
         fov={75} 
@@ -116,6 +120,7 @@ function RocketEmulator({id}: {id:string}) {
     <WindowInsideBorder id={id}>
       <div id="rocket-emulator-container">
         <Canvas gl={{ antialias: true }}
+          tabIndex={10}
           style={{ background: "#9ff0fc" }} // CSS background style
           onCreated={({ gl }) => {
             gl.setClearColor("#9ff0fc"); // Background color for the scene

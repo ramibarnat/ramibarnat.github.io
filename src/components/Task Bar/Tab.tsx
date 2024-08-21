@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import './Tab.css'
 import { TabContext } from './TabContext';
 

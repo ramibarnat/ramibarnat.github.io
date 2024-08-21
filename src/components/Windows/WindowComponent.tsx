@@ -77,10 +77,9 @@ function WindowComponent({children, init_x, init_y, init_width, init_height, id}
     }
 
     useEffect(() => {
-        
         document.addEventListener('mouseup', handleMouseUp)
         return () => document.removeEventListener('mouseup', handleMouseUp);
-    }, []);
+    }, [tabs]);
 
     return (
         <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
