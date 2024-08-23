@@ -56,6 +56,10 @@
     cursor: grab;
 }
 
+#scroll-bar-thumb-outer:active {
+    cursor:grabbing
+}
+
 #scroll-bar-thumb-inner {
     height: 100%;
 }

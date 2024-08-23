@@ -37,10 +37,10 @@ function Projects({id}: {id:string}) {
             <div id="text-container">
               <h1 style={{ marginTop: 5 }} className="project-title">Batle.us</h1>
               <p  className="project-body">
-                I am currently developing a multiplayer game using. Angular, 
+                I am currently developing a multiplayer country guessing game Angular, 
                 Tailwind, Node.js, Express.js, and AWS along with libraries 
-                such as D3.js, three.js, and socket.io. Utilized Git for source 
-                control. (Link: {` `}
+                such as D3.js, three.js, and socket.io. Geospatial data was utilized
+                to map countries onto the sphere. (Link: {` `}
                 <a href="http://www.batle.us/" target="_blank">
                   www.batle.us
                 </a>) 

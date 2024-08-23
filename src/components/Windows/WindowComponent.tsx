@@ -35,9 +35,10 @@ function WindowComponent({children, init_x, init_y, init_width, init_height, id}
     // when the user tries to drag from this specified DOM element
     const dragHandleRef = useRef(null);
     const closeButtonRef = useRef(null);
-
+    
+    // This comment prevents a build error that results from event not being used
+    // @ts-ignore
     const handleDrag = (event: any, data: any) => {
-        event = event; // prevents error, fix this later
         setPosition({
             x: position.x + data.deltaX,
             y: position.y + data.deltaY,
@@ -83,7 +84,7 @@ function WindowComponent({children, init_x, init_y, init_width, init_height, id}
 
     return (
         <Draggable position={{x:position.x, y:position.y}} bounds={{top: 0}}
-        onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart} key={id}>
+        onDrag={handleDrag} onMouseDown={handleMouseDown} onStart={handleDragStart}>
             {/* In this first div, we set the z-index of the window based on the focused property of the window */}
             <div style={{ width: initialDimensions.width, height: initialDimensions.height, zIndex: tabs[id].focused ? 1: 0}} className='outer-window-container'>
                 <div className='default-inner-container' id='window-container'>
