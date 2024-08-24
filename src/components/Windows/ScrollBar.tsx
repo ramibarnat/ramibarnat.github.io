@@ -2,7 +2,6 @@ import "./ScrollBar.css";
 import { useState, useEffect, useRef, useCallback } from "react";
 import pyramid from "../../assets/pyramid.png";
 import ResizeObserver from "resize-observer-polyfill";
-// import Draggable from "react-draggable";
 
 function ScrollBar(props: any) {
   // This is the scrollable content from the parent container
@@ -98,23 +97,6 @@ function ScrollBar(props: any) {
     setIsDragging(true);
   }
 
-  // const handleDrag = (event: any, data: any) => {
-  //   let outer_height= 1;
-  //   let thumb_height= 1;
-  //   let new_thumb_top: number;
-
-  //   if (scrollContainer.current) {
-  //     outer_height = (scrollContainer.current as HTMLElement).clientHeight;
-  //     thumb_height = (scrollContainer.current as HTMLElement).children[0].clientHeight;
-  //   }
-
-  //   new_thumb_top = data.y;
-  //   setThumbTop(new_thumb_top);
-  //   let percentage_scrolled = (new_thumb_top + 3) / (outer_height-thumb_height);
-  //   if (scrollRef.current) {
-  //     scrollRef.current.scrollTop = (scrollRef.current.scrollHeight - scrollRef.current.clientHeight) * percentage_scrolled;
-  //   }
-  // }
 
   // The useCallback hook is important because it prevents
   // functions from being re-created if they're being referenced
@@ -215,7 +197,6 @@ function ScrollBar(props: any) {
         <div ref={scrollContainer} id="tread">
           
           {/* Scrollbar Thumb Elements */}
-          {/* <Draggable bounds="parent" axis="y" onDrag={handleDrag} onStart={handleThumbClick} onStop={handleMouseUp}> */}
             <div
               style={{ height: thumbHeight, top: thumbTop }}
               ref = {thumbRef}
@@ -226,7 +207,6 @@ function ScrollBar(props: any) {
                 className="inner-scroll-button"
                 id="scroll-bar-thumb-inner"></div>
             </div>
-          {/* </Draggable> */}
 
         </div>
         <div onClick={downButtonClick} onTouchStart={downButtonClick} className="outer-scroll-button">
