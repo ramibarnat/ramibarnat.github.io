@@ -52,12 +52,16 @@ function BaseAppIcon({
     }
   };
 
+  // @ts-ignore
   const handleDrag = (event: any, data: any) => {
-    event = event; // prevents warning, fix this later
     setPosition({
       x: position.x + data.deltaX,
       y: position.y + data.deltaY,
     });
+  };
+
+  const imageBlueTint = {
+    filter: isHighlighted ? 'sepia(1) saturate(4) hue-rotate(200deg)' : 'none',
   };
 
   useEffect(() => {
@@ -85,7 +89,7 @@ function BaseAppIcon({
         onTouchStart={handleClick}
         onClick={handleClick}
         className="app-container">
-        <img className="app-image" src={app_img} />
+        <img style={imageBlueTint} className="app-image" src={app_img} />
         <p
           style={{
             backgroundColor: isHighlighted ? "rgba(4, 2, 146, 0.979)" : "transparent",

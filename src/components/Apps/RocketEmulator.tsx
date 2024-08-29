@@ -7,7 +7,7 @@ import * as THREE from 'three'
 import planet_surface from '../../assets/3d/planet_surface.png'
 import planet_clouds from '../../assets/3d/clouds.png'
 import { useRef } from "react";
-import { Physics, useBox, useSphere } from "@react-three/cannon";
+import { Physics, useBox } from "@react-three/cannon";
 
 interface ModelConfig {
   url: string, 
@@ -119,7 +119,7 @@ const RocketEmulatorComponent = () => {
       const unsubscribe = api.position.subscribe((position) => {
         // Focus camera on the spaceship at all times
         controllerRef.current.target.set(position[0], position[1], position[2]);
-        
+
         // Calculating gravity direction and magnitude
         const directionToPlanet = new THREE.Vector3()
         .subVectors(new THREE.Vector3(0,0,0), new THREE.Vector3(position[0],position[1],position[2]))
