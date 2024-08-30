@@ -90,8 +90,7 @@ function WindowComponent({children, init_x, init_y, init_width, init_height, id}
                 <div className='default-inner-container' id='window-container'>
                     <div ref={dragHandleRef} id='window-top-bar'>
                         <div id='action-buttons'>
-                            <div ref={closeButtonRef}
-                            className={mouseDownClose + '-outer-container'}>
+                            <div ref={closeButtonRef} className={mouseDownClose + '-outer-container'}>
                                 <div onTouchStart={closeDown} onTouchEnd={handleMouseUp} onMouseDown={closeDown} 
                                 className={mouseDownClose + '-inner-container'} id='close-application'>
                                     <img id='close-icon' src={close} />
