@@ -57,7 +57,7 @@ function Desktop() {
             {/* render the right click context menu */}
             {contextMenuVisible && 
                 <div ref={contextMenuRef}>
-                    <ContextMenu  x_pos={contextMenuPos.x} y_pos={contextMenuPos.y}/>
+                    <ContextMenu  x_pos={contextMenuPos.x} y_pos={contextMenuPos.y} addApp={createNewApp}/>
                 </div>
             }
         </div>

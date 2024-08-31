@@ -31,6 +31,7 @@
     padding-bottom: 10px;
 
     margin-left: 1px;
+    margin-right: 10px;
     margin-top: 2px;
     margin-bottom: 2px;
 
@@ -78,7 +79,7 @@
     position: absolute;
 
     left: 142px;
-    top: 1px;
+    top: -1px;
     width: 120px;
     height: fit-content;
 
