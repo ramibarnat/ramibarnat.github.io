@@ -16,7 +16,7 @@ function Desktop() {
             2: {component: RocketEmulatorIcon, props: {init_x: 40, init_y: 140}},
             3: {component: SonicAppIcon, props: {init_x: 40, init_y: 280}},
         });
-    const [nextId, setNextId] = useState(2);
+    const [nextId, setNextId] = useState(4);
     const [contextMenuPos, setContextMenuPos] = useState({x: 0, y:0});
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
 
@@ -38,9 +38,11 @@ function Desktop() {
     // @ts-ignore
     const createNewApp = (component: React.ComponentType<any>, props?: any) => {
         setDesktopApps(prev => {
-            return {...prev, [nextId]:{component:component, props: props}}
-            setNextId(prev => prev+1)
+            const newList = {...prev, [nextId]:{component:component, props: props}};
+            setNextId(prev => prev+1);
+            return newList;
         })
+        setContextMenuVisible(false);
     }
     return (
         <div onContextMenu={handleRightClick} onClick={handleClick} id="desktop-container">

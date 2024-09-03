@@ -1,11 +1,10 @@
 import './ContextMenu.css'
 import pyramid from '../../assets/pyramid.png'
-import { useContext } from 'react'
-import { TabContext } from '../Task Bar/TabContext'
+import FolderIcon from '../Apps/FolderIcon'
 
 function ContextMenu({x_pos, y_pos, addApp}: {x_pos: number, y_pos: number, addApp: any}) {
     const createNewFolder = () => {
-        
+        addApp(FolderIcon, {init_x: x_pos, init_y: y_pos})
     }
 
     return (
