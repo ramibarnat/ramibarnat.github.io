@@ -7,11 +7,13 @@ import Folder from './Folder'
 interface FolderIconProps {
     init_x?: number,
     init_y?: number,
+    id: string,
 }
-function FolderIcon({init_x, init_y}: FolderIconProps){
+function FolderIcon({init_x, init_y, id}: FolderIconProps){
     const { addTab } = useContext(TabContext);
+    console.log(id);
     
-    const openApp = (id: string) => {
+    const openApp = () => {
         addTab("Folder", id, Folder, filled_folder)
     }
 

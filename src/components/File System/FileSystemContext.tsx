@@ -10,12 +10,25 @@ interface FileChildrenType {
 interface FileSystemContextType {
     folders: Record<string,FileChildrenType>,   
     addFolder: (id: string, parent: string, name: string) => void,
-    addApp: (id: string, parent: string, name: string, component: React.ComponentType<any>, x_pos: number, y_pos: number) => void,
+    addApp: (id: string, parent: string, component: React.ComponentType<any>) => void,
     removeFolder: (id:string) => void,
 }
 
 const FileSystemContext = createContext<FileSystemContextType>({
-    folders: {},
+    folders: {"123456789":
+                {
+                    children: {"987654321": FolderIcon}, 
+                    parent: null, 
+                    name: "root"
+                },
+                "987654321": 
+                {
+                    children: {},
+                    parent: "123456789",
+                    name: "users"
+                }
+                
+                },
     addFolder: () => {},
     addApp: () => {},
     removeFolder: () => {},
@@ -26,8 +39,22 @@ interface ProviderProps {
 }
 
 
-const FileSystemProvider: FC<ProviderProps> = ({children}) => {
-    const [folders, setFolders] = useState<Record<string,FileChildrenType>>({});
+const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
+    const [folders, setFolders] = useState<Record<string,FileChildrenType>>(
+        {"123456789":
+        {
+            children: {"987654321": FolderIcon}, 
+            parent: null, 
+            name: "root"
+        },
+        "987654321": 
+        {
+            children: {},
+            parent: "123456789",
+            name: "users"
+        }
+        
+        });
  
     const addFolder = (id: string, parent: string, name: string) => {
         setFolders(prevFolders => {
@@ -43,6 +70,7 @@ const FileSystemProvider: FC<ProviderProps> = ({children}) => {
                 name: name, 
             }
             newFolders[parent].children[id] = FolderIcon;
+            console.log(newFolders);
             return newFolders;
         });
       };
@@ -54,21 +82,25 @@ const FileSystemProvider: FC<ProviderProps> = ({children}) => {
                 return prevFolders;
             }
             // console.log(`Window removed with id: ${id}`)
-            const newTabs = {...prevFolders};
-            const parentId = newTabs[id].parent;
+            const newFolders = {...prevFolders};
+            const parentId = newFolders[id].parent;
             if (parentId) {
-                delete newTabs[parentId].children[id];
+                delete newFolders[parentId].children[id];
             } else {
                 console.log('parent id not found');
             }
 
-            delete newTabs[id];
-            return newTabs;
+            delete newFolders[id];
+            return newFolders;
         })
     }
 
-    const addApp = (id: string, component: React.ComponentType<any>, x_pos: number, y_pos: number) => {
-        
+    const addApp = (id: string, parent: string, component: React.ComponentType<any>) => {
+        setFolders(prevFolders => {
+            const newFolders = {...prevFolders}
+            newFolders[parent].children[id] = component;
+            return newFolders;
+        })
     }
 
     return (
@@ -78,4 +110,4 @@ const FileSystemProvider: FC<ProviderProps> = ({children}) => {
     )
 }
 
-export {FileSystemContext, FileSystemProvider} 
+export {FileSystemContext, FileSystemContextProvider} 

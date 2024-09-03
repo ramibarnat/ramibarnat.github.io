@@ -35,7 +35,6 @@ function Desktop() {
         }
     }
 
-    // @ts-ignore
     const createNewApp = (component: React.ComponentType<any>, props?: any) => {
         setDesktopApps(prev => {
             const newList = {...prev, [nextId]:{component:component, props: props}};

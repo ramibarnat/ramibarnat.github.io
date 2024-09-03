@@ -1,10 +1,15 @@
 import './ContextMenu.css'
 import pyramid from '../../assets/pyramid.png'
 import FolderIcon from '../Apps/FolderIcon'
+import { useContext } from 'react'
+import { FileSystemContext } from '../File System/FileSystemContext'
 
 function ContextMenu({x_pos, y_pos, addApp}: {x_pos: number, y_pos: number, addApp: any}) {
+    const { addFolder } = useContext(FileSystemContext);
+
     const createNewFolder = () => {
-        addApp(FolderIcon, {init_x: x_pos, init_y: y_pos})
+        addFolder("test", "987654321","test");
+        addApp(FolderIcon, {init_x: x_pos, init_y: y_pos, id: "test"});
     }
 
     return (

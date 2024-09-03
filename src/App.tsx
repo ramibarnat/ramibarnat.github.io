@@ -2,6 +2,7 @@ import './App.css'
 import Desktop from './components/Desktop'
 import Bar from './components/Task Bar/Bar'
 import { TabContextProvider } from './components/Task Bar/TabContext'
+import { FileSystemContextProvider } from './components/File System/FileSystemContext'
 
 function App() {
 
@@ -9,8 +10,10 @@ function App() {
     <>
       <div className='grain-bg'/>
       <TabContextProvider>
-        <Desktop/>
-        <Bar/>
+        <FileSystemContextProvider>
+          <Desktop/>
+          <Bar/>
+        </FileSystemContextProvider>
       </TabContextProvider>
     </>
   )
