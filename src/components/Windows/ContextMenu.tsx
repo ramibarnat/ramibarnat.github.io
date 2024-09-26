@@ -3,12 +3,13 @@ import pyramid from '../../assets/pyramid.png'
 import FolderIcon from '../Apps/FolderIcon'
 import { useContext } from 'react'
 import { FileSystemContext } from '../File System/FileSystemContext'
+import generateRandomID from '../GenerateRandomID'
 
 function ContextMenu({x_pos, y_pos, addApp}: {x_pos: number, y_pos: number, addApp: any}) {
     const { addFolder } = useContext(FileSystemContext);
 
     const createNewFolder = () => {
-        addFolder("test", "987654321","test");
+        addFolder(generateRandomID(), "123456787","test");
         addApp(FolderIcon, {init_x: x_pos, init_y: y_pos, id: "test"});
     }
 
