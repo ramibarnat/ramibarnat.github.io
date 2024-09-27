@@ -8,7 +8,7 @@ interface RocketEmulatorIconProps {
     init_x?: number,
     init_y?: number,
 }
-function ProjectsAppIcon({init_x, init_y}: RocketEmulatorIconProps){
+function RocketEmulatorIcon({init_x, init_y}: RocketEmulatorIconProps){
     const { addTab } = useContext(TabContext);
     const name = "Rocket Simulator (WIP)"
     
@@ -21,4 +21,4 @@ function ProjectsAppIcon({init_x, init_y}: RocketEmulatorIconProps){
     )
 }
 
-export default ProjectsAppIcon
+export default RocketEmulatorIcon

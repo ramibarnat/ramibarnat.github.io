@@ -9,8 +9,9 @@ function ContextMenu({x_pos, y_pos, addApp}: {x_pos: number, y_pos: number, addA
     const { addFolder } = useContext(FileSystemContext);
 
     const createNewFolder = () => {
-        addFolder(generateRandomID(), "123456787","test");
-        addApp(FolderIcon, {init_x: x_pos, init_y: y_pos, id: "test"});
+        const id = generateRandomID()
+        addFolder(id, "desktop", "new folder");
+        addApp(FolderIcon, {init_x: x_pos, init_y: y_pos, id: id});
     }
 
     return (

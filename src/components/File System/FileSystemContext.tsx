@@ -1,9 +1,8 @@
 import { createContext, FC, ReactNode, useState } from "react"
 import FolderIcon from "../Apps/FolderIcon"
-import generateRandomID from "../GenerateRandomID"
 
 interface FileChildrenType {
-    children: Record<string,React.ComponentType<any>>,
+    children: Record<string, { component: React.ComponentType<any>, props: Record<string, any> }>,
     parent: string | null,
     name: string
 }
@@ -29,25 +28,25 @@ interface ProviderProps {
 
 const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
     const [folders, setFolders] = useState<Record<string,FileChildrenType>>(
-        {"123456789":
+        {"root":
         {
-            children: {"123456788": FolderIcon}, 
+            children: {"123456788": {component: FolderIcon, props:{init_x: 40, init_y: 40}}}, 
             parent: null, 
             name: "root"
         },
-        "123456788": 
+        "users": 
         {
             children: {"123456787": FolderIcon},
             parent: "123456789",
             name: "users"
         },
-        "123456787": 
+        "rami": 
         {
             children: {"123456786": FolderIcon},
             parent: "123456788",
             name: "Rami"
         },
-        "123456786": 
+        "desktop": 
         {
             children: {},
             parent: "123456787",

@@ -1,22 +1,15 @@
 import { useContext, useRef, useState } from 'react';
-import ProjectsAppIcon from './Apps/ProjectsAppIcon';
 import './Desktop.css'
 import { TabContext } from './Task Bar/TabContext';
-import RocketEmulatorIcon from './Apps/RocketEmulatorIcon';
-import SonicAppIcon from './Apps/SonicAppIcon';
 import ContextMenu from './Windows/ContextMenu';
+import { FileSystemContext } from './File System/FileSystemContext';
 
 function Desktop() {
     const { tabs } = useContext(TabContext);
+    const { folders } = useContext(FileSystemContext);
+    const desktopApps = folders['desktop'].children;
     const contextMenuRef = useRef<HTMLDivElement | null>(null);
 
-    const [desktopApps, setDesktopApps] = 
-        useState({
-            1: {component: ProjectsAppIcon, props: {init_x: 40, init_y: 40}},
-            2: {component: RocketEmulatorIcon, props: {init_x: 40, init_y: 140}},
-            3: {component: SonicAppIcon, props: {init_x: 40, init_y: 280}},
-        });
-    const [nextId, setNextId] = useState(4);
     const [contextMenuPos, setContextMenuPos] = useState({x: 0, y:0});
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
 
@@ -35,23 +28,24 @@ function Desktop() {
         }
     }
 
-    const createNewApp = (component: React.ComponentType<any>, props?: any) => {
-        setDesktopApps(prev => {
-            const newList = {...prev, [nextId]:{component:component, props: props}};
-            setNextId(prev => prev+1);
-            return newList;
-        })
+    const createNewApp = () => {
+        // setDesktopApps(prev => {
+        //     const newList = {...prev, [nextId]:{component:component, props: props}};
+        //     setNextId(prev => prev+1);
+        //     return newList;
+        // })
         setContextMenuVisible(false);
     }
+
     return (
         <div onContextMenu={handleRightClick} onClick={handleClick} id="desktop-container">
             {/* render all the desktop app icons */}
-            {Object.entries(desktopApps).map(([id, app]) => (
-                <app.component key={id} {...app.props} />
+            {Object.entries(desktopApps).map(([id, child]) => (
+                <child.component key={id} />
             ))}
 
             {/* render all the desktop windows */}
-            {Object.entries(tabs).map(([id,tab]) => (
+            {Object.entries(tabs).map(([id, tab]) => (
                 <tab.component key={id} id={id} {...tab.props}/>
             ))}
 

@@ -42,7 +42,7 @@ const TabContextProvider: FC<ProviderProps> = ({children}) => {
             if (newTabs[focusedTab]) {
                 newTabs[focusedTab].focused = false;
             }
-            setFocusedTab(id);
+            setFocusedTab(id); // focuses the tab that was just added
             newTabs[id] = {
                 name: name, 
                 component: component, 
