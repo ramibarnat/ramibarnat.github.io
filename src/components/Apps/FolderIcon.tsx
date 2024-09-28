@@ -14,7 +14,8 @@ function FolderIcon({init_x, init_y, id}: FolderIconProps){
     console.log(id);
     
     const openApp = () => {
-        addTab("Folder", id, Folder, filled_folder)
+        console.log(id);
+        addTab("Folder", id, Folder, filled_folder);
     }
 
     return (

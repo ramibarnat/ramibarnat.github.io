@@ -28,31 +28,26 @@ function Desktop() {
         }
     }
 
-    const createNewApp = () => {
-        // setDesktopApps(prev => {
-        //     const newList = {...prev, [nextId]:{component:component, props: props}};
-        //     setNextId(prev => prev+1);
-        //     return newList;
-        // })
+    const removeContextMenu = () => {
         setContextMenuVisible(false);
     }
 
     return (
         <div onContextMenu={handleRightClick} onClick={handleClick} id="desktop-container">
             {/* render all the desktop app icons */}
-            {Object.entries(desktopApps).map(([id, child]) => (
-                <child.component key={id} />
+            {desktopApps && Object.entries(desktopApps).map(([id, child]) => (
+                <child.component key={id} {...child.props}/>
             ))}
 
             {/* render all the desktop windows */}
-            {Object.entries(tabs).map(([id, tab]) => (
+            {tabs && Object.entries(tabs).map(([id, tab]) => (
                 <tab.component key={id} id={id} {...tab.props}/>
             ))}
 
             {/* render the right click context menu */}
             {contextMenuVisible && 
                 <div ref={contextMenuRef}>
-                    <ContextMenu  x_pos={contextMenuPos.x} y_pos={contextMenuPos.y} addApp={createNewApp}/>
+                    <ContextMenu  x_pos={contextMenuPos.x} y_pos={contextMenuPos.y} removeContextMenu={removeContextMenu}/>
                 </div>
             }
         </div>

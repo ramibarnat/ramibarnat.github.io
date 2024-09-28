@@ -1,17 +1,16 @@
 import './ContextMenu.css'
 import pyramid from '../../assets/pyramid.png'
-import FolderIcon from '../Apps/FolderIcon'
 import { useContext } from 'react'
 import { FileSystemContext } from '../File System/FileSystemContext'
 import generateRandomID from '../GenerateRandomID'
 
-function ContextMenu({x_pos, y_pos, addApp}: {x_pos: number, y_pos: number, addApp: any}) {
+function ContextMenu({x_pos, y_pos, removeContextMenu}: {x_pos: number, y_pos: number, removeContextMenu: () => void }) {
     const { addFolder } = useContext(FileSystemContext);
 
     const createNewFolder = () => {
         const id = generateRandomID()
-        addFolder(id, "desktop", "new folder");
-        addApp(FolderIcon, {init_x: x_pos, init_y: y_pos, id: id});
+        addFolder(id, "desktop", "new folder", {init_x: x_pos, init_y: y_pos});
+        removeContextMenu();
     }
 
     return (

@@ -10,8 +10,8 @@ interface FileChildrenType {
 
 interface FileSystemContextType {
     folders: Record<string,FileChildrenType>,   
-    addFolder: (id: string, parent: string, name: string) => void,
-    addApp: (id: string, parent: string, component: React.ComponentType<any>) => void,
+    addFolder: (id: string, parent: string, name: string, props: any) => void,
+    addApp: (id: string, parent: string, component: React.ComponentType<any>, props: any) => void,
     removeFolder: (id:string) => void,
 }
 
@@ -29,34 +29,50 @@ interface ProviderProps {
 
 const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
     const [folders, setFolders] = useState<Record<string,FileChildrenType>>(
+        // Here we define the default structure of our file system
         {"root":
         {
-            children: {"123456788": {component: FolderIcon, props:{init_x: 40, init_y: 40}}}, 
+            children: {"users": {component: FolderIcon, props:{init_x: 40, init_y: 40, id: "users"}}}, 
             parent: null, 
             name: "root"
         },
         "users": 
         {
-            children: {"123456787": {component: FolderIcon, props:{init_x: 40, init_y: 40}}},
-            parent: "123456789",
+            children: {"rami": {component: FolderIcon, props:{init_x: 40, init_y: 40, id: "rami"}}},
+            parent: "root",
             name: "users"
         },
         "rami": 
         {
-            children: {"123456786": {component: FolderIcon, props:{init_x: 40, init_y: 40}}},
-            parent: "123456788",
+            children: {"desktop": {component: FolderIcon, props:{init_x: 40, init_y: 40, id: "desktop"}}},
+            parent: "users",
             name: "Rami"
         },
         "desktop": 
         {
-            children: {"123456786": {component: ProjectsAppIcon, props:{init_x: 40, init_y: 40}}},
-            parent: "123456787",
+            children: {
+                "projects": {component: ProjectsAppIcon, props:{init_x: 40, init_y: 40, id: "projects"}},
+                "test": {component: FolderIcon, props:{init_x: 40, init_y: 140, id: "test"}}
+        },
+            parent: "rami",
             name: "Desktop"
+        },
+        "test": 
+        {
+            children: {"test2": {component: FolderIcon, props:{init_x: 40, init_y: 40, id: "test2"}}},
+            parent: "desktop",
+            name: "test"
+        },
+        "test2": 
+        {
+            children: {},
+            parent: "test",
+            name: "test2"
         },
         
         });
  
-    const addFolder = (id: string, parent: string, name: string) => {
+    const addFolder = (id: string, parent: string, name: string, props: any) => {
         setFolders(prevFolders => {
             if (prevFolders[id]) {
                 console.log("Folder already exists");
@@ -69,7 +85,8 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
                 parent: parent,
                 name: name, 
             }
-            newFolders[parent].children[id] = FolderIcon;
+            // Add the new folder as a child of its parent
+            newFolders[parent].children[id] = {component: FolderIcon, props:{init_x: props.init_x, init_y: props.init_y}};
             console.log(newFolders);
             return newFolders;
         });
@@ -95,10 +112,10 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
         })
     }
 
-    const addApp = (id: string, parent: string, component: React.ComponentType<any>) => {
+    const addApp = (id: string, parent: string, component: React.ComponentType<any>, props: any) => {
         setFolders(prevFolders => {
             const newFolders = {...prevFolders}
-            newFolders[parent].children[id] = component;
+            newFolders[parent].children[id] = {component: component, props: {init_x: props.init_x, init_y: props.init_y}};
             return newFolders;
         })
     }

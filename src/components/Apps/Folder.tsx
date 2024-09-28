@@ -4,17 +4,19 @@ import { FileSystemContext } from "../File System/FileSystemContext"
 
 function Folder({id}: {id: string}) {
     const { folders } = useContext(FileSystemContext)
+    let this_folder = folders[id]
 
     useEffect(() => {
-        const this_folder = folders[id]
-        console.log(this_folder)
+        this_folder = folders[id]
+        console.log(folders)
+        console.log(id)
     }, [])
     
     return (
         <WindowInsideBorder id={id}>
-            {/* {Object.entries(folders).map(([id,tab]) => (
-                <tab.component key={id} id={id} {...tab.props}/>
-            ))} */}
+            {this_folder && Object.entries(this_folder.children).map(([id,child]) => (
+                <child.component key={id} {...child.props}/>
+            ))}
         </WindowInsideBorder>
     )
 }
