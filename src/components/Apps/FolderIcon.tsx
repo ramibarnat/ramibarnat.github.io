@@ -2,24 +2,30 @@ import BaseAppIcon from "./BaseAppIcon"
 import filled_folder from '../../assets/App_Icons/filled_folder.png'
 import { useContext } from "react";
 import { TabContext } from "../Task Bar/TabContext";
-import Folder from './Folder'
+import FileExplorer from './FileExplorer'
+import { FileSystemContext } from "../File System/FileSystemContext";
 
 interface FolderIconProps {
     init_x?: number,
     init_y?: number,
     id: string,
+    change_folder?: (id: string) => void, // this will change the active folder in the file explorer
 }
-function FolderIcon({init_x, init_y, id}: FolderIconProps){
+function FolderIcon({init_x, init_y, id, change_folder}: FolderIconProps){
     const { addTab } = useContext(TabContext);
-    console.log(id);
+    const { folders } = useContext(FileSystemContext)
+    const name = folders[id]?.name || "New Folder";
     
     const openApp = () => {
-        console.log(id);
-        addTab("Folder", id, Folder, filled_folder);
+        if (change_folder) {
+            change_folder(id);
+        } else {
+            addTab(name, id, FileExplorer, filled_folder);
+        }
     }
 
     return (
-        <BaseAppIcon openApp={openApp} name={"Folder"} init_x={init_x} init_y={init_y} app_img={filled_folder}/>
+        <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={filled_folder}/>
     )
 }
 
