@@ -16,6 +16,7 @@ interface TabContextType {
     addTab: (name: string, id: string, component: React.ComponentType<any>, image: string, props?: any) => void,
     removeTab: (id:string) => void,
     setFocus: (id:string) => void,
+    changeTabName: (id: string, new_name: string) => void,
     focusedTab: string,
 }
 
@@ -24,6 +25,7 @@ const TabContext = createContext<TabContextType>({
     addTab: () => {},
     removeTab: () => {},
     setFocus: () => {},
+    changeTabName: () => {},
     focusedTab: "",
 });
 
@@ -83,8 +85,20 @@ const TabContextProvider: FC<ProviderProps> = ({children}) => {
         })
     }
 
+    const changeTabName = (id: string, new_name: string) => {
+        setTabs(prevTabs => {
+            if (!prevTabs[id]) {
+                return prevTabs;
+            }
+            const newTabs = {...prevTabs};
+
+            newTabs[id].name = new_name;
+            return newTabs;
+        })
+    }
+
     return (
-        <TabContext.Provider value={{tabs, addTab, removeTab, focusedTab, setFocus}}>
+        <TabContext.Provider value={{tabs, addTab, removeTab, focusedTab, setFocus, changeTabName}}>
             {children}
         </TabContext.Provider>
     )

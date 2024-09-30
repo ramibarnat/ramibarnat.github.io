@@ -1,6 +1,8 @@
 import { createContext, FC, ReactNode, useState } from "react"
 import FolderIcon from "../Apps/FolderIcon"
 import ProjectsAppIcon from "../Apps/ProjectsAppIcon";
+import RocketEmulatorIcon from "../Apps/RocketEmulatorIcon";
+import SonicAppIcon from "../Apps/SonicAppIcon";
 
 interface FileChildrenType {
     children: Record<string, { component: React.ComponentType<any>, props: Record<string, any> }>,
@@ -51,17 +53,19 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
         "desktop": 
         {
             children: {
-                "projects": {component: ProjectsAppIcon, props:{init_x: 40, init_y: 40, id: "projects"}},
-                "test": {component: FolderIcon, props:{init_x: 40, init_y: 140, id: "test"}}
+                "projects": {component: ProjectsAppIcon, props:{init_x: 40, init_y: 40}},
+                "rocket-emulator": {component: RocketEmulatorIcon, props:{init_x: 40, init_y: 140}},
+                "sonic": {component: SonicAppIcon, props:{init_x: 40, init_y: 280}},
+                "folder": {component: FolderIcon, props:{init_x: 40, init_y: 380, id: "folder"}}
         },
             parent: "rami",
             name: "Desktop"
         },
-        "test": 
+        "folder": 
         {
             children: {"test2": {component: FolderIcon, props:{init_x: 40, init_y: 40, id: "test2"}}},
             parent: "desktop",
-            name: "test"
+            name: "Folder"
         },
         "test2": 
         {
@@ -86,8 +90,7 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
                 name: name, 
             }
             // Add the new folder as a child of its parent
-            newFolders[parent].children[id] = {component: FolderIcon, props:{init_x: props.init_x, init_y: props.init_y}};
-            console.log(newFolders);
+            newFolders[parent].children[id] = {component: FolderIcon, props:{init_x: props.init_x, init_y: props.init_y, id: id}};
             return newFolders;
         });
       };
