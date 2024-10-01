@@ -7,7 +7,7 @@ import { FileSystemContext } from './File System/FileSystemContext';
 function Desktop() {
     const { tabs } = useContext(TabContext);
     const { folders } = useContext(FileSystemContext);
-    
+
     const desktopApps = folders['desktop']?.children || null;
 
     const contextMenuRef = useRef<HTMLDivElement | null>(null);
@@ -26,12 +26,9 @@ function Desktop() {
         if (event.target === event.currentTarget) {
             setContextMenuPos({x: event.clientX, y: event.clientY})
             setContextMenuVisible(true);
-            console.log('right clicked');
+        } else {
+            setContextMenuVisible(false);
         }
-    }
-
-    const removeContextMenu = () => {
-        setContextMenuVisible(false);
     }
 
     return (
@@ -49,7 +46,7 @@ function Desktop() {
             {/* render the right click context menu */}
             {contextMenuVisible && 
                 <div ref={contextMenuRef}>
-                    <ContextMenu  x_pos={contextMenuPos.x} y_pos={contextMenuPos.y} removeContextMenu={removeContextMenu}/>
+                    <ContextMenu  x_pos={contextMenuPos.x} y_pos={contextMenuPos.y} removeContextMenu={() => setContextMenuVisible(false)}/>
                 </div>
             }
         </div>

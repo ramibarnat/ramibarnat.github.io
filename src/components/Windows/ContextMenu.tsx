@@ -9,7 +9,7 @@ function ContextMenu({x_pos, y_pos, removeContextMenu}: {x_pos: number, y_pos: n
 
     const createNewFolder = () => {
         const id = generateRandomID()
-        addFolder(id, "desktop", "new folder", {init_x: x_pos, init_y: y_pos});
+        addFolder(id, "desktop", "New Folder", {init_x: x_pos, init_y: y_pos});
         removeContextMenu();
     }
 
