@@ -56,7 +56,7 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
                 "projects": {component: ProjectsAppIcon, props:{init_x: 40, init_y: 40}},
                 "rocket-emulator": {component: RocketEmulatorIcon, props:{init_x: 40, init_y: 140}},
                 "sonic": {component: SonicAppIcon, props:{init_x: 40, init_y: 280}},
-                "folder": {component: FolderIcon, props:{init_x: 40, init_y: 380, id: "folder"}}
+                "folder": {component: FolderIcon, props:{init_x: 40, init_y: 375, id: "folder"}}
         },
             parent: "rami",
             name: "Desktop"

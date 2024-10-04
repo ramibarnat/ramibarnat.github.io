@@ -7,11 +7,9 @@ import { FileSystemContext } from './File System/FileSystemContext';
 function Desktop() {
     const { tabs } = useContext(TabContext);
     const { folders } = useContext(FileSystemContext);
-
     const desktopApps = folders['desktop']?.children || null;
 
     const contextMenuRef = useRef<HTMLDivElement | null>(null);
-
     const [contextMenuPos, setContextMenuPos] = useState({x: 0, y:0});
     const [contextMenuVisible, setContextMenuVisible] = useState(false);
 

@@ -18,6 +18,10 @@ interface TabContextType {
     setFocus: (id:string) => void,
     changeTabName: (id: string, new_name: string) => void,
     focusedTab: string,
+
+    // This will keep track of the item currently being dragged
+    itemDraggedID: string | null, 
+    setItemDraggedID: (id: string | null) => void,
 }
 
 const TabContext = createContext<TabContextType>({
@@ -27,6 +31,8 @@ const TabContext = createContext<TabContextType>({
     setFocus: () => {},
     changeTabName: () => {},
     focusedTab: "",
+    itemDraggedID: null,
+    setItemDraggedID: () => {},
 });
 
 interface ProviderProps {
@@ -37,6 +43,7 @@ interface ProviderProps {
 const TabContextProvider: FC<ProviderProps> = ({children}) => {
     const [tabs, setTabs] = useState<Record<string,TabConfig>>({});
     const [focusedTab, setFocusedTab] = useState<string>("");
+    const [itemDraggedID, setItemDraggedID] = useState<string | null>(null);
  
     const addTab = (name: string, id: string, component: React.ComponentType<any>, image: string, props?: any) => {
         setTabs(prevTabs => {
@@ -98,7 +105,7 @@ const TabContextProvider: FC<ProviderProps> = ({children}) => {
     }
 
     return (
-        <TabContext.Provider value={{tabs, addTab, removeTab, focusedTab, setFocus, changeTabName}}>
+        <TabContext.Provider value={{tabs, addTab, removeTab, focusedTab, setFocus, changeTabName, itemDraggedID, setItemDraggedID}}>
             {children}
         </TabContext.Provider>
     )

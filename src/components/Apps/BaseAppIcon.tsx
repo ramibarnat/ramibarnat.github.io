@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import "./BaseAppIcon.css";
 import Draggable from "react-draggable";
+import { TabContext } from "../Task Bar/TabContext";
 
 interface AppProps {
   openApp: (id: string) => void,
@@ -10,18 +11,16 @@ interface AppProps {
   app_img: any,
 }
 
-function BaseAppIcon({
-  openApp,
-  name = "New App",
-  init_x = 0,
-  init_y = 0,
-  app_img,
-}: AppProps) {
+function BaseAppIcon({openApp, name = "New App", init_x = 0, init_y = 0, app_img,}: AppProps) {
+  const { setItemDraggedID } = useContext(TabContext);
+
   const [clicks, setClicks] = useState(0); // Checks for double click
   const [timeoutId, setTimeoutId] = useState<any>(-1); // Time in between each click
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [position, setPosition] = useState({ x: init_x, y: init_y });
   const [id, setId] = useState("");
+  const [zIndex, setZIndex] = useState<number>(0);
+
   // This hook will be used to create a reference to a DOM element
   // that can be used in our handleClickOutside function
   const componentRef = useRef(null);
@@ -44,11 +43,9 @@ function BaseAppIcon({
   };
 
   const handleOutsideClick = (event: any) => {
-    if (
-      componentRef.current &&
-      !(componentRef.current as HTMLElement).contains(event.target)
-    ) {
+    if (componentRef.current && !(componentRef.current as HTMLElement).contains(event.target)) {
       setIsHighlighted(false);
+      setZIndex(0);
     }
   };
 
@@ -59,6 +56,18 @@ function BaseAppIcon({
       y: position.y + data.deltaY,
     });
   };
+
+  const handleMouseDown = (event: any) => {
+    event.preventDefault();
+    setZIndex(2);
+    setIsHighlighted(true);
+    setItemDraggedID(id);
+  }
+
+  const handleMouseUp = () => {
+    setZIndex(0);
+    // setItemDraggedID(null);
+  }
 
   const imageBlueTint = {
     filter: isHighlighted ? 'sepia(1) saturate(4) hue-rotate(200deg)' : 'none',
@@ -81,14 +90,12 @@ function BaseAppIcon({
   return (
     <Draggable
       bounds={"parent"}
-      position={{ x: position.x, y: position.y }}
-      onDrag={handleDrag}
-      onMouseDown={(event) => event.preventDefault()}>
+      position={{ x: position.x, y: position.y }} onDrag={handleDrag}
+      onMouseDown={handleMouseDown} onStop={handleMouseUp}
+      >
       <div
-        ref={componentRef}
-        onTouchStart={handleClick}
-        onClick={handleClick}
-        className="app-container">
+        ref={componentRef} onTouchStart={handleClick} onClick={handleClick}
+        className="app-container" style={{zIndex: zIndex}}>
         <img style={imageBlueTint} className="app-image" src={app_img} />
         <p
           style={{
