@@ -3,10 +3,11 @@ import WindowInsideBorder from "../Windows/WindowInsideBorder"
 import { FileSystemContext } from "../File System/FileSystemContext"
 import { TabContext } from "../Task Bar/TabContext";
 import FileExplorerContextMenu from "../Windows/FileExplorerContextMenu";
+import FolderIcon from "./FolderIcon";
 
 function FileExplorer({id}: {id: string}) {
-    const { folders } = useContext(FileSystemContext)
-    const [currentFolder, setCurrentFolder] = useState(folders[id] || null);
+    const { folders, addApp } = useContext(FileSystemContext)
+    const [currentFolderID, setCurrentFolderID] = useState("");
     const { changeTabName, itemDraggedID, setItemDraggedID } = useContext(TabContext)
     
     const contextMenuRef = useRef<HTMLDivElement | null>(null);
@@ -17,30 +18,15 @@ function FileExplorer({id}: {id: string}) {
 
     useEffect(() => {
         // Sets current folder if incorrectly intialized
-        if (!currentFolder && folders[id]) {
-            setCurrentFolder(folders[id])
-        }
-        const handleMouseUp = (event: any) => {
-            if (explorerRef.current && explorerRef.current.contains(event.target) && itemDraggedID) {
-              console.log(`Mouse up detected on File Explorer ${id}`);
-            }
-          };
-          
-          // We set the third argument to true to listen during capture phase.
-          // This gives priority and ensures that this is triggered first,
-          // preventing the draggable components from preventing our default
-          // event propogation.
-          document.addEventListener('mouseup', handleMouseUp, true);
-      
-          return () => {
-            document.removeEventListener('mouseup', handleMouseUp, true);
-          };
+        if (!currentFolderID && folders[id]) {
+            setCurrentFolderID(id)
+        } 
     }, [])
     
     function change_folder(new_id: string) {
         console.log(new_id)
         if (folders[new_id]) {
-            setCurrentFolder(folders[new_id]);
+            setCurrentFolderID(new_id);
 
             // We use the tab id here, not the folder id
             changeTabName(id, folders[new_id].name);
@@ -68,6 +54,15 @@ function FileExplorer({id}: {id: string}) {
         }
     }
 
+    const handleMouseUp = () => {
+        // console.log(`Mouse up detected on File Explorer ${id}`);    
+        if (itemDraggedID && folders[currentFolderID] && !folders[currentFolderID]['children'][itemDraggedID]) {
+            addApp(itemDraggedID, currentFolderID, FolderIcon, {init_x: 100, init_y: 100})
+            console.log(currentFolderID);
+        }        
+        setItemDraggedID(null);
+      };
+
     const removeContextMenu = () => {
         if (contextMenuVisible) {
             setContextMenuVisible(false);
@@ -76,10 +71,10 @@ function FileExplorer({id}: {id: string}) {
 
     return (
             <WindowInsideBorder id={id}>
-                <div onContextMenu={handleRightClick} onClick={handleClick} ref={explorerRef}
+                <div onContextMenu={handleRightClick} onClick={handleClick} onMouseUp={handleMouseUp} ref={explorerRef}
                     className="file-explorer-container" style={{width: "100%"}}>
 
-                    {currentFolder && Object.entries(currentFolder.children).map(([id,child]) => {
+                    {currentFolderID && Object.entries(folders[currentFolderID].children).map(([id,child]) => {
                         return (
                             <child.component key={id} change_folder={change_folder} {...child.props}/>
                         )

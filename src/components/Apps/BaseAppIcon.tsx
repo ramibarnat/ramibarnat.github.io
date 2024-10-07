@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import "./BaseAppIcon.css";
 import Draggable from "react-draggable";
 import { TabContext } from "../Task Bar/TabContext";
+import generateRandomID from "../GenerateRandomID";
 
 interface AppProps {
   openApp: (id: string) => void,
@@ -55,6 +56,15 @@ function BaseAppIcon({openApp, name = "New App", init_x = 0, init_y = 0, app_img
       x: position.x + data.deltaX,
       y: position.y + data.deltaY,
     });
+
+    // pointer-events are css styles that affect the DOM element's ability
+    // to be detected by mouse events. If they're set to none, then they
+    // should not be identified as the event.target when the mouseup event
+    // is triggered. This will allow us to identify the file explorer
+    // underneath it as the event.target instead of the app itself.
+    document.querySelectorAll(".app-container").forEach((el: any) => {
+      el.style.pointerEvents = "none";
+    });
   };
 
   const handleMouseDown = (event: any) => {
@@ -64,34 +74,34 @@ function BaseAppIcon({openApp, name = "New App", init_x = 0, init_y = 0, app_img
     setItemDraggedID(id);
   }
 
-  const handleMouseUp = () => {
-    setZIndex(0);
-    // setItemDraggedID(null);
-  }
-
   const imageBlueTint = {
     filter: isHighlighted ? 'sepia(1) saturate(4) hue-rotate(200deg)' : 'none',
   };
 
   useEffect(() => {
-    setId(() => {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      let res = ""
-      for (let i=0; i < 10; i++) {
-        res += chars[Math.floor(Math.random() * chars.length)];
-      }
-      return res;
-    })
+    setId(generateRandomID());
+    const handleMouseUp = () => {
+      setZIndex(0);
+      document.querySelectorAll(".app-container").forEach((el: any) => {
+        el.style.pointerEvents = "auto";
+      });
+      // setItemDraggedID(null);
+    }
+
+    document.addEventListener('mouseup', handleMouseUp, true);
     document.addEventListener("click", handleOutsideClick);
 
-    return () => document.removeEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mouseup", handleMouseUp, true);
+      document.removeEventListener("click", handleOutsideClick);
+    }
   }, []);
 
   return (
     <Draggable
       bounds={"parent"}
       position={{ x: position.x, y: position.y }} onDrag={handleDrag}
-      onMouseDown={handleMouseDown} onStop={handleMouseUp}
+      onMouseDown={handleMouseDown}
       >
       <div
         ref={componentRef} onTouchStart={handleClick} onClick={handleClick}
