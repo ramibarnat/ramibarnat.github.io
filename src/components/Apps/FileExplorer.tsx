@@ -76,7 +76,7 @@ function FileExplorer({id}: {id: string}) {
 
                     {currentFolderID && Object.entries(folders[currentFolderID].children).map(([id,child]) => {
                         return (
-                            <child.component key={id} change_folder={change_folder} {...child.props}/>
+                            <child.component key={id} change_folder={change_folder} id={id} {...child.props}/>
                         )
                     })}
                     {contextMenuVisible && 

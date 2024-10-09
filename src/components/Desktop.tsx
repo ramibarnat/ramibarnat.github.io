@@ -33,7 +33,7 @@ function Desktop() {
         <div onContextMenu={handleRightClick} onClick={handleClick} id="desktop-container">
             {/* render all the desktop app icons */}
             {desktopApps && Object.entries(desktopApps).map(([id, child]) => (
-                <child.component key={id} {...child.props}/>
+                <child.component key={id} id={id} {...child.props}/>
             ))}
 
             {/* render all the desktop windows */}

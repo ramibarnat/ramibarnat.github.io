@@ -7,11 +7,12 @@ import Projects from './Projects'
 interface ProjectsAppIconProps {
     init_x?: number,
     init_y?: number,
+    id: string,
 }
-function ProjectsAppIcon({init_x, init_y}: ProjectsAppIconProps){
+function ProjectsAppIcon({init_x, init_y, id}: ProjectsAppIconProps){
     const { addTab } = useContext(TabContext);
     
-    const openApp = (id: string) => {
+    const openApp = () => {
         addTab("Projects", id, Projects, filled_folder)
     }
 
