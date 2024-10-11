@@ -6,7 +6,7 @@ import FileExplorerContextMenu from "../Windows/FileExplorerContextMenu";
 import FolderIcon from "./FolderIcon";
 
 function FileExplorer({id}: {id: string}) {
-    const { folders, addApp } = useContext(FileSystemContext)
+    const { folders, moveApp } = useContext(FileSystemContext)
     const [currentFolderID, setCurrentFolderID] = useState("");
     const { changeTabName, itemDraggedID, setItemDraggedID } = useContext(TabContext)
     
@@ -57,8 +57,8 @@ function FileExplorer({id}: {id: string}) {
     const handleMouseUp = () => {
         // console.log(`Mouse up detected on File Explorer ${id}`);    
         if (itemDraggedID && folders[currentFolderID] && !folders[currentFolderID]['children'][itemDraggedID]) {
-            addApp(itemDraggedID, currentFolderID, FolderIcon, {init_x: 100, init_y: 100})
-            console.log(currentFolderID);
+            moveApp(itemDraggedID, currentFolderID);
+            // console.log(currentFolderID);
         }        
         setItemDraggedID(null);
       };

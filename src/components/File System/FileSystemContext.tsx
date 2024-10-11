@@ -7,7 +7,8 @@ import SonicAppIcon from "../Apps/SonicAppIcon";
 interface FileChildrenType {
     children: Record<string, { component: React.ComponentType<any>, props: Record<string, any> }>,
     parent: string | null,
-    name: string
+    name: string,
+    component: React.ComponentType<any>,
 }
 
 interface FileSystemContextType {
@@ -16,6 +17,7 @@ interface FileSystemContextType {
     addApp: (id: string, parent: string, component: React.ComponentType<any>, props: any) => void,
     removeFolder: (id: string) => void,
     moveApp: (id: string, new_parent: string) => void,
+    changeAppPos: (id: string, x_pos: number, y_pos: number) => void,
 }
 
 const FileSystemContext = createContext<FileSystemContextType>({
@@ -24,6 +26,7 @@ const FileSystemContext = createContext<FileSystemContextType>({
     addApp: () => {},
     removeFolder: () => {},
     moveApp: () => {},
+    changeAppPos: () => {},
 });
 
 interface ProviderProps {
@@ -38,19 +41,22 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
         {
             children: {"users": {component: FolderIcon, props:{init_x: 40, init_y: 40}}}, 
             parent: null, 
-            name: "root"
+            name: "root",
+            component: FolderIcon,
         },
         "users": 
         {
             children: {"rami": {component: FolderIcon, props:{init_x: 40, init_y: 40}}},
             parent: "root",
-            name: "users"
+            name: "users",
+            component: FolderIcon,
         },
         "rami": 
         {
             children: {"desktop": {component: FolderIcon, props:{init_x: 40, init_y: 40}}},
             parent: "users",
-            name: "Rami"
+            name: "Rami",
+            component: FolderIcon,
         },
         "desktop": 
         {
@@ -61,37 +67,43 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
                 "folder": {component: FolderIcon, props:{init_x: 40, init_y: 375}}
         },
             parent: "rami",
-            name: "Desktop"
+            name: "Desktop",
+            component: FolderIcon,
         },
         "folder": 
         {
             children: {"test2": {component: FolderIcon, props:{init_x: 40, init_y: 40}}},
             parent: "desktop",
-            name: "Folder"
+            name: "Folder",
+            component: FolderIcon,
         },
         "projects": // Although this is an App and not a folder, we still need to be able to look up its parent
         {
             children: {},
             parent: "desktop",
-            name: "Projects"
+            name: "Projects",
+            component: ProjectsAppIcon,
         },
         "rocket-emulator":
         {
             children: {},
             parent: "desktop",
-            name: "Rocket Simulator (WIP)"
+            name: "Rocket Simulator (WIP)",
+            component: RocketEmulatorIcon,
         },
         "sonic":
         {
             children: {},
             parent: "desktop",
-            name: "Sonic"
+            name: "Sonic",
+            component: SonicAppIcon,
         },
         "test2": 
         {
             children: {},
-            parent: "test",
-            name: "test2"
+            parent: "folder",
+            name: "test2",
+            component: FolderIcon,
         },
         
         });
@@ -108,6 +120,7 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
                 children: {},
                 parent: parent,
                 name: name, 
+                component: FolderIcon,
             }
             // Add the new folder as a child of its parent
             newFolders[parent].children[id] = {component: FolderIcon, props:{init_x: props.init_x, init_y: props.init_y, id: id}};
@@ -118,7 +131,7 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
     const removeFolder = (id: string) => {
         setFolders(prevFolders => {
             if (!prevFolders[id]){
-                // console.log(`Window does not exist with id: ${id}`)
+                console.log(`Window does not exist with id: ${id}`)
                 return prevFolders;
             }
             // console.log(`Window removed with id: ${id}`)
@@ -143,21 +156,59 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
             }
             const newFolders = {...prevFolders};
             const parentId = newFolders[id].parent;
-            if (parentId && newFolders[parentId]) {
-                if (newFolders[parentId].children[id]){
-                    delete newFolders[parentId].children[id]
-                    if (newFolders[new_parent]) {
-                        // newFolders[new_parent].children[id] = 
-                        return;
-                    }
-                } else {
-                    console.log(`App not found in parent's children`);
-                    return prevFolders;
-                }
-            } else {
+            if (!parentId || !newFolders[parentId]) {
                 console.log('Parent ID not found');
                 return prevFolders;
             }
+            if (!newFolders[parentId].children[id]) {
+                console.log(`Parent does not contain target app`);
+                return prevFolders;
+            }
+            if (!newFolders[new_parent]) {
+                console.log('New Parent ID not found');
+                return prevFolders;
+            }
+            if (id === new_parent) {
+                console.log('Cannot put folder inside of itself');
+                return prevFolders;
+            }
+
+            // remove app from current parent
+            delete newFolders[parentId].children[id]; 
+
+            // add app to new parent
+            newFolders[new_parent].children[id] = {component: newFolders[id].component, props: {init_x: 100, init_y: 100}};
+
+            // update parent of current app
+            newFolders[id].parent = new_parent;
+
+            return newFolders;
+            
+        })
+    }
+
+    const changeAppPos = (id: string, deltaX: number, deltaY: number) => {
+        setFolders(prevFolders => {
+            if (!prevFolders[id]) {
+                console.log("App not found");
+                return prevFolders;
+            }
+
+            const newFolders = {...prevFolders};
+            const parentId = newFolders[id].parent;
+            if (!parentId || !newFolders[parentId]) {
+                console.log(`Parent ID not found: ${parentId}`);
+                return prevFolders;
+            }
+            if (!newFolders[parentId].children[id]) {
+                console.log('Parent does not contain target app');
+                return prevFolders;
+            }
+
+            const curPos = prevFolders[parentId].children[id].props;
+            newFolders[parentId].children[id].props = {init_x: curPos.init_x+deltaX, init_y: curPos.init_y+deltaY};
+            console.log(`successfully moved app to ${newFolders[parentId].children[id].props.init_x}, ${newFolders[parentId].children[id].props.init_y}`)
+            return newFolders;
         })
     }
 
@@ -170,7 +221,7 @@ const FileSystemContextProvider: FC<ProviderProps> = ({children}) => {
     }
 
     return (
-        <FileSystemContext.Provider value={{folders, addFolder, removeFolder, addApp}}>
+        <FileSystemContext.Provider value={{folders, addFolder, removeFolder, addApp, moveApp, changeAppPos}}>
             {children}
         </FileSystemContext.Provider>
     )

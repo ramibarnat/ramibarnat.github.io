@@ -28,9 +28,9 @@ function FolderIcon({init_x, init_y, id, change_folder}: FolderIconProps){
     return (
         <>
             {folders[id] && Object.keys(folders[id].children).length > 0 ? (
-                <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={filled_folder}/>
+                <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={filled_folder} app_id={id}/>
             ) : (
-                <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={empty_folder}/>
+                <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={empty_folder} app_id={id}/>
             )}
         </>
 

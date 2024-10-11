@@ -17,7 +17,7 @@ function SonicAppIcon({init_x, init_y, id}: RocketEmulatorIconProps){
     }
 
     return (
-        <BaseAppIcon openApp={openApp} name={"Sonic"} init_x={init_x} init_y={init_y} app_img={sonic}/>
+        <BaseAppIcon openApp={openApp} name={"Sonic"} init_x={init_x} init_y={init_y} app_img={sonic} app_id={id}/>
     )
 }
 

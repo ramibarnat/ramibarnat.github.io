@@ -18,7 +18,7 @@ function RocketEmulatorIcon({init_x, init_y, id}: RocketEmulatorIconProps){
     }
 
     return (
-        <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={rocket}/>
+        <BaseAppIcon openApp={openApp} name={name} init_x={init_x} init_y={init_y} app_img={rocket} app_id={id}/>
     )
 }
 

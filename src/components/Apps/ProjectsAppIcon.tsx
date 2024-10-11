@@ -17,7 +17,7 @@ function ProjectsAppIcon({init_x, init_y, id}: ProjectsAppIconProps){
     }
 
     return (
-        <BaseAppIcon openApp={openApp} name={"Projects"} init_x={init_x} init_y={init_y} app_img={filled_folder}/>
+        <BaseAppIcon openApp={openApp} name={"Projects"} init_x={init_x} init_y={init_y} app_img={filled_folder} app_id={id}/>
     )
 }
 
