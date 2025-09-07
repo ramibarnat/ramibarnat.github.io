@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
-import WindowInsideBorder from "../Windows/WindowInsideBorder";
-import { TabContext } from "../Task Bar/TabContext";
+import WindowInsideBorder from "../windows/WindowInsideBorder";
+import { TabContext } from "../task-bar/TabContext";
 
 interface GameEmulatorProps {
     src: string,

@@ -1,6 +1,6 @@
 import { forwardRef, useCallback, useEffect } from "react";
 import "./RocketEmulator.css";
-import WindowInsideBorder from "../Windows/WindowInsideBorder";
+import WindowInsideBorder from "../windows/WindowInsideBorder";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
 import * as THREE from 'three'

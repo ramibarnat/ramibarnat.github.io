@@ -1,7 +1,7 @@
 import BaseAppIcon from "./BaseAppIcon"
 import sonic from '../../assets/App_Icons/sonic.png'
 import { useContext } from "react";
-import { TabContext } from "../Task Bar/TabContext";
+import { TabContext } from "../task-bar/TabContext";
 import GameEmulator from "./GameEmulator";
 
 interface RocketEmulatorIconProps {

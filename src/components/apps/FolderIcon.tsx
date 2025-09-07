@@ -2,9 +2,9 @@ import BaseAppIcon from "./BaseAppIcon"
 import filled_folder from '../../assets/App_Icons/filled_folder.png'
 import empty_folder from '../../assets/App_Icons/folder.png'
 import { useContext } from "react";
-import { TabContext } from "../Task Bar/TabContext";
+import { TabContext } from "../task-bar/TabContext";
 import FileExplorer from './FileExplorer'
-import { FileSystemContext } from "../File System/FileSystemContext";
+import { FileSystemContext } from "../file-system/FileSystemContext";
 
 interface FolderIconProps {
     init_x?: number,

@@ -1,7 +1,7 @@
 import './ContextMenu.css'
 import pyramid from '../../assets/pyramid.png'
 import { useContext, useEffect, useRef } from 'react'
-import { FileSystemContext } from '../File System/FileSystemContext'
+import { FileSystemContext } from '../file-system/FileSystemContext'
 import generateRandomID from '../GenerateRandomID'
 
 function FileExplorerContextMenu({is_visible, x_pos, y_pos, removeContextMenu}: {is_visible: boolean, x_pos: number, y_pos: number, removeContextMenu: () => void }) {

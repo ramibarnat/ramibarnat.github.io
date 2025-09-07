@@ -1,7 +1,7 @@
 import './ContextMenu.css'
 import pyramid from '../../assets/pyramid.png'
 import { useContext } from 'react'
-import { FileSystemContext } from '../File System/FileSystemContext'
+import { FileSystemContext } from '../file-system/FileSystemContext'
 import generateRandomID from '../GenerateRandomID'
 
 function ContextMenu({x_pos, y_pos, removeContextMenu}: {x_pos: number, y_pos: number, removeContextMenu: () => void }) {

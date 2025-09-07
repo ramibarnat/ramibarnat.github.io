@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react"
-import WindowInsideBorder from "../Windows/WindowInsideBorder"
-import { FileSystemContext } from "../File System/FileSystemContext"
-import { TabContext } from "../Task Bar/TabContext";
-import FileExplorerContextMenu from "../Windows/FileExplorerContextMenu";
+import WindowInsideBorder from "../windows/WindowInsideBorder"
+import { FileSystemContext } from "../file-system/FileSystemContext"
+import { TabContext } from "../task-bar/TabContext";
+import FileExplorerContextMenu from "../windows/FileExplorerContextMenu";
 
 function FileExplorer({id}: {id: string}) {
     const { folders, moveApp } = useContext(FileSystemContext)

@@ -1,8 +1,8 @@
 import { useContext, useRef, useState } from 'react';
 import './Desktop.css'
-import { TabContext } from './Task Bar/TabContext';
-import ContextMenu from './Windows/ContextMenu';
-import { FileSystemContext } from './File System/FileSystemContext';
+import { TabContext } from './task-bar/TabContext';
+import ContextMenu from './windows/ContextMenu';
+import { FileSystemContext } from './file-system/FileSystemContext';
 
 function Desktop() {
     const { tabs } = useContext(TabContext);

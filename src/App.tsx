@@ -1,8 +1,8 @@
 import './App.css'
 import Desktop from './components/Desktop'
-import Bar from './components/Task Bar/Bar'
-import { TabContextProvider } from './components/Task Bar/TabContext'
-import { FileSystemContextProvider } from './components/File System/FileSystemContext'
+import Bar from './components/task-bar/Bar'
+import { TabContextProvider } from './components/task-bar/TabContext'
+import { FileSystemContextProvider } from './components/file-system/FileSystemContext'
 
 function App() {
 

@@ -1,10 +1,10 @@
 import "./Projects.css";
-import ScrollBar from "../Windows/ScrollBar";
+import ScrollBar from "../windows/ScrollBar";
 import batle from "../../assets/batle_screen.png";
 import sleep_prevent from "../../assets/sleep_prevention.mp4"
 import pokedex from "../../assets/pokedex_img.png"
 import { useEffect, useRef, useState } from "react";
-import WindowComponent from "../Windows/WindowComponent";
+import WindowComponent from "../windows/WindowComponent";
 
 function Projects({id}: {id:string}) {
   const scrollableContentRef = useRef(null);

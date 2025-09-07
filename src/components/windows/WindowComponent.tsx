@@ -2,7 +2,7 @@ import { ReactNode, useState, useRef, useEffect, useContext } from 'react';
 import './WindowComponent.css'
 import Draggable from 'react-draggable'
 import close from '../../assets/x_icon.png'
-import { TabContext } from '../Task Bar/TabContext';
+import { TabContext } from '../task-bar/TabContext';
 
 interface WindowComponentProps {
     children?: ReactNode;

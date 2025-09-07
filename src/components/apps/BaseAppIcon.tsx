@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import "./BaseAppIcon.css";
 import Draggable from "react-draggable";
-import { TabContext } from "../Task Bar/TabContext";
+import { TabContext } from "../task-bar/TabContext";
 import generateRandomID from "../GenerateRandomID";
-import { FileSystemContext } from "../File System/FileSystemContext";
+import { FileSystemContext } from "../file-system/FileSystemContext";
 
 interface AppProps {
   openApp: (id: string) => void,
