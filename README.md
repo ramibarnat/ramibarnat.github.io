@@ -1,3 +1,3 @@
 # [RamiBarnat.GitHub.io](https://ramibarnat.github.io)
 
-# This is my portfolio website that I built using React
+### Use `npm run deploy` to deploy to github pages
