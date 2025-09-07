@@ -2,7 +2,7 @@ import { createContext, FC, ReactNode, useState } from "react"
 import FolderIcon from "../apps/FolderIcon"
 import ProjectsAppIcon from "../apps/ProjectsAppIcon";
 import RocketEmulatorIcon from "../apps/RocketEmulatorIcon";
-import SonicAppIcon from "../apps/SonicAppIcon";
+import SonicAppIcon from "../apps/game-emulator/SonicAppIcon.tsx";
 
 interface FileChildrenType {
     children: Record<string, { component: React.ComponentType<any>, props: Record<string, any> }>,

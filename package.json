@@ -1,12 +1,12 @@
 {
-  "homepage": "http://ramisouguir/github.io",
+  "homepage": "http://ramibarnat/github.io",
   "name": "personal-website",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run predeploy && gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
